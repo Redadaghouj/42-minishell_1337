@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_operator.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.42.fr>          +#+  +:+       +#+        */
+/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 11:59:20 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/06/03 15:07:55 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 int	is_append_out(char *input)
 {

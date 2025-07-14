@@ -12,11 +12,11 @@ MANDO := mandatory
 MANDO_INC := ${MANDO}/include
 
 UTILS_PATH := ${MANDO}/src/utils
-LEXER_PATH := ${MANDO}/src/lexer
-PARSER_PATH := ${MANDO}/src/parser
-EXPANSION_PATH := ${MANDO}/src/expansion
-ENV_PATH := ${MANDO}/src/env
-HEREDOC_PATH := ${MANDO}/src/heredoc
+LEXER_PATH := ${MANDO}/src/parsing/lexer
+PARSER_PATH := ${MANDO}/src/parsing/parser
+EXPANSION_PATH := ${MANDO}/src/parsing/expansion
+ENV_PATH := ${MANDO}/src/parsing/env
+HEREDOC_PATH := ${MANDO}/src/parsing/heredoc
 
 UTILS := ${UTILS_PATH}/ft_strcmp.c \
 		 ${UTILS_PATH}/ft_strdup.c \

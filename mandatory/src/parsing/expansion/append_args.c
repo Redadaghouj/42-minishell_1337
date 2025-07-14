@@ -6,11 +6,11 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:04:55 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/09 01:26:54 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 int	get_args_count(char **args)
 {

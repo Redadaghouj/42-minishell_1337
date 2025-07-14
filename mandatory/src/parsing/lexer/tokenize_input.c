@@ -6,11 +6,11 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 10:41:06 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/08 20:07:59 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 int	is_operator(char c)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_lists.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda <reda@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 10:41:06 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/06/05 14:33:39 by reda             ###   ########.fr       */
+/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
 t_token	*ft_lstnew_token(char *value)
 {

@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redir_lists.c                                      :+:      :+:    :+:   */
+/*   env_lists.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 15:22:31 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/14 02:14:51 by redadgh          ###   ########.fr       */
+/*   Created: 2025/07/02 17:27:25 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-t_redir	*ft_lstnew_redir(unsigned int type, char *file_delim)
+t_env	*ft_lstnew_env(char *value, char *key)
 {
-	t_redir	*node;
+	t_env	*node;
 
-	node = (t_redir *) malloc(sizeof(t_redir));
+	node = (t_env *) malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
-	node->type = type;
-	node->file_delim = file_delim;
-	node->heredoc_fd = 0;
-	node->should_expand = true;
+	node->value = value;
+	node->key = key;
 	node->next = NULL;
 	return (node);
 }
 
-t_redir	*ft_lstlast_redir(t_redir *lst)
+t_env	*ft_lstlast_env(t_env *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -36,9 +34,28 @@ t_redir	*ft_lstlast_redir(t_redir *lst)
 	return (lst);
 }
 
-void	ft_lstadd_back_redir(t_redir **lst, t_redir *node)
+void	ft_lstclear_env(t_env **lst)
 {
-	t_redir	*last;
+	t_env	*ptr;
+	t_env	*curr;
+
+	if (!lst)
+		return ;
+	ptr = *lst;
+	while (ptr != NULL)
+	{
+		curr = ptr;
+		ptr = ptr->next;
+		free(curr->value);
+		free(curr->key);
+		free(curr);
+	}
+	*lst = NULL;
+}
+
+void	ft_lstadd_back_env(t_env **lst, t_env *node)
+{
+	t_env	*last;
 
 	if (!lst || !node)
 		return ;
@@ -46,7 +63,7 @@ void	ft_lstadd_back_redir(t_redir **lst, t_redir *node)
 		*lst = node;
 	else
 	{
-		last = ft_lstlast_redir(*lst);
+		last = ft_lstlast_env(*lst);
 		last->next = node;
 	}
 }

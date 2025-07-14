@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_lists.c                                     :+:      :+:    :+:   */
+/*   redir_lists.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:22:31 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/12 00:43:25 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../../include/minishell.h"
 
-t_cmd	*ft_lstnew_cmd(char **args)
+t_redir	*ft_lstnew_redir(unsigned int type, char *file_delim)
 {
-	t_cmd	*node;
+	t_redir	*node;
 
-	node = (t_cmd *) malloc(sizeof(t_cmd));
+	node = (t_redir *) malloc(sizeof(t_redir));
 	if (!node)
 		return (NULL);
-	node->args = args;
-	node->redir = NULL;
+	node->type = type;
+	node->file_delim = file_delim;
+	node->heredoc_fd = 0;
+	node->should_expand = true;
 	node->next = NULL;
 	return (node);
 }
 
-t_cmd	*ft_lstlast_cmd(t_cmd *lst)
+t_redir	*ft_lstlast_redir(t_redir *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -34,38 +36,9 @@ t_cmd	*ft_lstlast_cmd(t_cmd *lst)
 	return (lst);
 }
 
-void	free_redir(t_redir *lst)
+void	ft_lstadd_back_redir(t_redir **lst, t_redir *node)
 {
-	t_redir	*ptr;
-
-	while (lst)
-	{
-		ptr = lst->next;
-		free(lst->file_delim);
-		free(lst);
-		lst = ptr;
-	}
-}
-
-void	ft_lstclear_cmd(t_cmd **lst)
-{
-	t_cmd	*ptr;
-
-	if (!lst)
-		return ;
-	while (*lst != NULL)
-	{
-		ptr = (*lst)->next;
-		free_buffer((*lst)->args);
-		free_redir((*lst)->redir);
-		free(*lst);
-		*lst = ptr;
-	}
-}
-
-void	ft_lstadd_back_cmd(t_cmd **lst, t_cmd *node)
-{
-	t_cmd	*last;
+	t_redir	*last;
 
 	if (!lst || !node)
 		return ;
@@ -73,7 +46,7 @@ void	ft_lstadd_back_cmd(t_cmd **lst, t_cmd *node)
 		*lst = node;
 	else
 	{
-		last = ft_lstlast_cmd(*lst);
+		last = ft_lstlast_redir(*lst);
 		last->next = node;
 	}
 }
