@@ -1,0 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 17:03:39 by redadgh           #+#    #+#             */
+/*   Updated: 2025/07/12 22:05:24 by redadgh          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef ENV_H
+# define ENV_H
+
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
+char	*get_env_value(char *var, t_env *env);
+t_env	*parse_env(void);
+t_env	*ft_lstnew_env(char *value, char *key);
+t_env	*ft_lstlast_env(t_env *lst);
+void	ft_lstclear_env(t_env **lst);
+void	ft_lstadd_back_env(t_env **lst, t_env *node);
+
+#endif
