@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:03:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/12 22:05:24 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:10:27 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,11 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+/* ENV */
 char	*get_env_value(char *var, t_env *env);
 t_env	*parse_env(void);
+
+/* ENV LISTS */
 t_env	*ft_lstnew_env(char *value, char *key);
 t_env	*ft_lstlast_env(t_env *lst);
 void	ft_lstclear_env(t_env **lst);

@@ -23,7 +23,8 @@ UTILS := ${UTILS_PATH}/ft_strcmp.c \
 		 ${UTILS_PATH}/ft_strlen.c \
 		 ${UTILS_PATH}/ft_substr.c \
 		 ${UTILS_PATH}/ft_strjoin.c \
-		 ${UTILS_PATH}/ft_itoa.c \
+		 ${UTILS_PATH}/ft_isalpha.c \
+		 ${UTILS_PATH}/ft_isdigit.c \
 		 ${UTILS_PATH}/ft_isalnum.c \
 		 ${UTILS_PATH}/ft_split.c \
 		 ${UTILS_PATH}/ft_strchr.c \

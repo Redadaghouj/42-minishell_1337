@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: reda <reda@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 18:52:40 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/06/05 14:34:39 by reda             ###   ########.fr       */
+/*   Updated: 2025/07/14 14:23:02 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,20 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+/* TOKENIZE INPUT */
 void	lexer(char *input, t_token **list);
+
+/* TOKENIZE LISTS */
+t_token	*ft_lstnew_token(char *value);
+t_token	*ft_lstlast_token(t_token *lst);
+void	ft_lstclear_token(t_token **lst);
+void	ft_lstadd_back_token(t_token **lst, t_token *node);
+
+/* CHECK OPERATOR */
 int		is_append_out(char *input);
 int		is_heredoc(char *input);
 int		is_redir_out(char c);
 int		is_redir_in(char c);
 int		is_pipe(char c);
-t_token	*ft_lstnew_token(char *value);
-t_token	*ft_lstlast_token(t_token *lst);
-void	ft_lstclear_token(t_token **lst);
-void	ft_lstadd_back_token(t_token **lst, t_token *node);
 
 #endif

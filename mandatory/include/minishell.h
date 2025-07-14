@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/14 03:01:09 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/14 14:30:44 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0
 
-extern char **environ;
+extern char	**environ;
 
 /* UTILS */
 int		ft_strcmp(char *s1, char *s2);
@@ -40,11 +40,13 @@ char	*ft_strdup(const char *s);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char *s1, char *s2);
-char	*ft_itoa(int n);
 void	*free_buffer(char **buffer);
 char	**ft_split(char const *s, char c);
 void	ft_putstr_fd(char *s, int fd);
-char    *gnl(int fd, int i);
+int		ft_isalnum(int c);
+int		ft_isdigit(int c);
+int		ft_isalpha(int c);
+char	*gnl(int fd, int i);
 
 /* MINISHELL UTILS */
 int		ends_prompt_loop(char *input);
