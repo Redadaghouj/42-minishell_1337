@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/15 19:03:03 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/15 19:16:24 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	process_line(char *input, t_env **env)
 	t_cmd	*cmd;
 
 	token = NULL;
-	cmd  = NULL;
+	cmd = NULL;
 	lexer(input, &token);
 	parser(token, &cmd);
 	expansion(*env, cmd);
@@ -61,7 +61,7 @@ void	run_script_shell(t_env **env)
 	{
 		input = gnl(STDIN_FILENO, 0);
 		if (!input)
-			break;
+			break ;
 		process_line(input, env);
 	}
 }
