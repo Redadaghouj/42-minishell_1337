@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/15 16:36:24 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/15 19:03:16 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ char	*gnl(int fd, int i);
 /* MINISHELL UTILS */
 int		ends_prompt_loop(char *input);
 void	handle_sigint(int sig);
-int		setup_lists(t_token **token, t_env **env, t_cmd **cmd);
-void	setup_signals(void);
+t_env   *init_env(void);
+void	setup_main_signals(void);
 
 void	print_cmd_list(t_cmd *cmd); // CHECK:
 

@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/13 17:52:13 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/15 19:02:56 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	handle_sigint(int sig)
 	rl_redisplay();
 }
 
-void	setup_signals(void)
+void	setup_main_signals(void)
 {
 	struct sigaction	sa;
 
@@ -39,6 +39,8 @@ int	ends_prompt_loop(char *input)
 {
 	if (!input || !ft_strcmp("exit", input))
 	{
+		if (input)
+			free(input);
 		printf("exit\n");
 		return (1);
 	}
@@ -61,13 +63,13 @@ void	*free_buffer(char **buffer)
 	return (NULL);
 }
 
-int	setup_lists(t_token **token, t_env **env, t_cmd **cmd)
+t_env	*init_env(void)
 {
-	*token = NULL;
-	*env = NULL;
-	*cmd = NULL;
-	*env = parse_env();
-	if (!*env)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	t_env	*env;
+
+	env = NULL;
+	env = parse_env();
+	if (!env)
+		return (NULL);
+	return (env);
 }

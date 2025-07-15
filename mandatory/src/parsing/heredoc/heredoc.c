@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:39:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/15 16:53:18 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/15 19:06:14 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	run_heredoc(t_redir *node, t_env *env)
 	int		status;
 	pid_t	pid;
 
-	signal(SIGINT, SIG_IGN);
+	ignore_sigint_main_signal();
 	pid = fork();
 	if (pid == -1)
 		return (EXIT_FAILURE);
@@ -90,7 +90,7 @@ int	run_heredoc(t_redir *node, t_env *env)
 	else
 	{
 		waitpid(pid, &status, 0);
-		setup_signals();
+		setup_main_signals();
 		if (WEXITSTATUS(status) == SIGINT_KILLED)
 		{
 			unlink(HEREDOC_TMP);

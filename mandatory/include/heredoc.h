@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:40:12 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/14 14:20:56 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/15 19:06:25 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int		handle_heredoc(t_cmd *cmd, t_env *env);
 /* HEREDOC SIGNALS */
 void	handle_heredoc_sigint(int signum);
 void	setup_heredoc_signals(void);
+void	ignore_sigint_main_signal(void);
 
 #endif
