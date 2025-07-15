@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/15 19:16:24 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/15 19:38:17 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(void)
 	env = init_env();
 	if (!env)
 		return (EXIT_FAILURE);
-	if (isatty(STDIN_FILENO))
+	else if (isatty(STDIN_FILENO))
 		run_interactive_shell(&env);
 	else
 		run_script_shell(&env);
