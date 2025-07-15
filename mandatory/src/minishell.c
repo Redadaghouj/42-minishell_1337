@@ -6,11 +6,11 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/15 19:38:17 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/15 19:59:45 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../include/minishell.h"
 
 void	cleanup_resources(t_token **token, t_cmd **cmd, char *input)
 {
@@ -50,7 +50,6 @@ void	run_interactive_shell(t_env **env)
 			process_line(input, env);
 		}
 	}
-	free(input);
 }
 
 void	run_script_shell(t_env **env)

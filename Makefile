@@ -62,8 +62,8 @@ SRC := 	${UTILS} \
 		${ENV} \
 		${HEREDOC} \
 		${EXECUTION} \
-		${MANDO}/minishell.c \
-		${MANDO}/minishell_utils.c
+		${MANDO}/src/minishell.c \
+		${MANDO}/src/minishell_utils.c
 
 OBJS := ${SRC:.c=.o}
 
