@@ -17,6 +17,7 @@ PARSER_PATH := ${MANDO}/src/parsing/parser
 EXPANSION_PATH := ${MANDO}/src/parsing/expansion
 ENV_PATH := ${MANDO}/src/parsing/env
 HEREDOC_PATH := ${MANDO}/src/parsing/heredoc
+EXECUTION_PATH := ${MANDO}/src/execution
 
 UTILS := ${UTILS_PATH}/ft_strcmp.c \
 		 ${UTILS_PATH}/ft_strdup.c \
@@ -51,12 +52,16 @@ ENV := ${ENV_PATH}/env.c \
 HEREDOC := ${HEREDOC_PATH}/heredoc.c \
 		   ${HEREDOC_PATH}/heredoc_signals.c
 
+EXECUTION := ${EXECUTION_PATH}/execution.c \
+		   ${EXECUTION_PATH}/execution_utils.c
+
 SRC := 	${UTILS} \
 		${LEXER} \
 		${PARSER} \
 		${EXPANSION} \
 		${ENV} \
 		${HEREDOC} \
+		${EXECUTION} \
 		${MANDO}/minishell.c \
 		${MANDO}/minishell_utils.c
 

@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/14 14:30:44 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/15 16:36:24 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include "expansion.h"
 # include "env.h"
 # include "heredoc.h"
+# include "execution.h"
 
 # define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0
