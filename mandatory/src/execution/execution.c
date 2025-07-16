@@ -6,8 +6,13 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/15 16:36:52 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/16 16:47:50 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	execution(t_env **env)
+{
+	
+}

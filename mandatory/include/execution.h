@@ -6,11 +6,15 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/15 16:35:33 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/16 16:48:29 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
+
+# include "env.h"
+
+void	execution(t_env **env);
 
 #endif
