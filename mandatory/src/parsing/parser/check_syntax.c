@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 20:23:48 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/16 16:01:54 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int	unclosed_quotes(char *value)
 	}
 	if (quote != 0)
 	{
-		printf("Shellnobyl: unexpected EOF while looking for matching ");
-		printf("`%c'\n", quote);
+		printf(ERR_UNCLOSED_QUOTES "`%c'\n", quote);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -44,12 +43,12 @@ int	empty_pipe(t_token *prev, unsigned int type, t_token *next)
 	{
 		if (prev->type != TOKEN_WORD)
 		{
-			printf("shellnobyl: syntax error near unexpected token `|'\n");
+			printf(ERR_EMPTY_PIPE_UNEXPECTED_TOKEN);
 			return (EXIT_FAILURE);
 		}
 		else if (!next)
 		{
-			printf("shellnobyl: syntax error: unexpected end of file\n");
+			printf(ERR_EMPTY_PIPE_UNEXPECTED_EOF);
 			return (EXIT_FAILURE);
 		}
 	}
@@ -63,15 +62,39 @@ int	invalid_redir(unsigned int type, t_token *next)
 	{
 		if (!next)
 		{
-			printf(SYNTAX_MSG);
+			printf(ERR_INVALID_REDIR_UNEXPECTED_NEWLINE);
 			return (EXIT_FAILURE);
 		}
 		else if (next->type != TOKEN_WORD)
 		{
-			printf("shellnobyl: syntax error near unexpected token ");
-			printf("`%s'\n", next->value);
+			printf(ERR_INVALID_REDIR_UNEXPECTED_TOKEN "`%s'\n", next->value);
 			return (EXIT_FAILURE);
 		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	redir_fd(bool toggle, int *fd)
+{
+	if (toggle)
+	{
+		*fd = dup(STDOUT_FILENO);
+		if (*fd == -1)
+			return (EXIT_FAILURE);
+		if (dup2(STDERR_FILENO, STDOUT_FILENO) == -1)
+		{
+			close(*fd);
+			return (EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		if (dup2(*fd, STDOUT_FILENO) == -1)
+		{
+			close(*fd);
+			return (EXIT_FAILURE);
+		}
+		close(*fd);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -79,8 +102,11 @@ int	invalid_redir(unsigned int type, t_token *next)
 int	check_syntax(t_token *list)
 {
 	t_token	*prev_token;
+	int		fd;
 
 	prev_token = list;
+	if (redir_fd(true, &fd))
+		return (EXIT_FAILURE);
 	while (list)
 	{
 		if (unclosed_quotes(list->value))
@@ -92,5 +118,7 @@ int	check_syntax(t_token *list)
 		prev_token = list;
 		list = list->next;
 	}
+	if (redir_fd(false, &fd))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

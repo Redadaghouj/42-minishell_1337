@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/15 19:16:48 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/16 15:09:36 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int		ft_isalpha(int c);
 char	*gnl(int fd, int i);
 
 /* MINISHELL UTILS */
-int		ends_prompt_loop(char *input);
+int		should_terminate_prompt(char *input);
 void	handle_sigint(int sig);
-t_env	*init_env(void);
 void	setup_main_signals(void);
+t_env	*init_env(void);
 
 void	print_cmd_list(t_cmd *cmd); // CHECK:
 

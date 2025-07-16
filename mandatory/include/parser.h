@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:46:12 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/14 14:27:52 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/16 15:38:42 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,16 @@
 
 # include "lexer.h"
 
-# define SYNTAX_MSG "shellnobyl: syntax error near unexpected token `newline'\n"
+# define ERR_UNCLOSED_QUOTES \
+		"Shellnobyl: unexpected EOF while looking for matching "
+# define ERR_EMPTY_PIPE_UNEXPECTED_TOKEN \
+		"shellnobyl: syntax error near unexpected token `|'\n"
+# define ERR_EMPTY_PIPE_UNEXPECTED_EOF \
+		"shellnobyl: syntax error: unexpected end of file\n"
+# define ERR_INVALID_REDIR_UNEXPECTED_NEWLINE \
+		"shellnobyl: syntax error near unexpected token `newline'\n"
+# define ERR_INVALID_REDIR_UNEXPECTED_TOKEN \
+		"shellnobyl: syntax error near unexpected token "
 
 typedef struct s_redir
 {

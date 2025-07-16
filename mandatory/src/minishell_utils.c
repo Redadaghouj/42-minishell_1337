@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/15 19:59:52 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/16 15:10:34 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ void	setup_main_signals(void)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-int	ends_prompt_loop(char *input)
+int	should_terminate_prompt(char *input)
 {
 	if (!input || !ft_strcmp("exit", input))
 	{
 		if (input)
 			free(input);
 		printf("exit\n");
-		return (1);
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 void	*free_buffer(char **buffer)

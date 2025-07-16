@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/15 19:59:45 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/16 15:09:25 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	run_interactive_shell(t_env **env)
 	while (true)
 	{
 		input = readline("☢️ shellnobyl$ ");
-		if (ends_prompt_loop(input))
+		if (should_terminate_prompt(input))
 			break ;
 		if (*input)
 		{
