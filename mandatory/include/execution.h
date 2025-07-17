@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/16 16:48:29 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/17 19:01:56 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define EXECUTION_H
 
 # include "env.h"
+# include "parser.h"
 
-void	execution(t_env **env);
+void	execution(t_env **env, t_cmd *cmd);
 
 #endif

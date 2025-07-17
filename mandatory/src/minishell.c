@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/16 16:47:28 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/17 19:07:37 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	process_line(char *input, t_env **env)
 	lexer(input, &token);
 	parser(token, &cmd);
 	expansion(*env, cmd);
-	if (!handle_heredoc(cmd, *env))
-		print_cmd_list(cmd);
-	execution(env);
+	handle_heredoc(cmd, *env);
+	print_cmd_list(cmd);
+	execution(env, cmd);
 	cleanup_resources(&token, &cmd, input);
 }
 
