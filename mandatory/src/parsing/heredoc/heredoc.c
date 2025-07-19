@@ -6,7 +6,7 @@
 /*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:39:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/15 19:06:14 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/07/17 23:29:04 by redadgh          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	child_process(t_redir *node, t_env *env)
 		}
 		if (node->should_expand)
 			line = expand_heredoc(line, env);
-		write(fd, line, ft_strlen(line));
+		ft_putstr_fd(line, fd);
 		free(line);
 	}
 	close(fd);
