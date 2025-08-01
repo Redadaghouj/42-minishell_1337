@@ -14,14 +14,14 @@ char	*ft_jm3_str(char *s1, char *s2, char *s3)
     return (res2);
 }
 
-void    ft_cd(char **arv, t_env *env)
+void    ft_cd(char **arv, t_env **env)
 {
     char    *home;
     char    *error_str;
 
     if (!arv[1])
     {
-        home = get_env_value("HOME", env);
+        home = get_env_value("HOME", *env);
         if (!home || chdir(home))
             perror("Shellnobyl: cd:");
     }
