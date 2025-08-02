@@ -30,7 +30,8 @@ UTILS := ${UTILS_PATH}/ft_strcmp.c \
 		 ${UTILS_PATH}/ft_split.c \
 		 ${UTILS_PATH}/ft_strchr.c \
 		 ${UTILS_PATH}/ft_putstr_fd.c \
-		 ${UTILS_PATH}/ft_gnl.c
+		 ${UTILS_PATH}/ft_gnl.c \
+		 ${UTILS_PATH}/ft_atoi.c \
 
 LEXER := ${LEXER_PATH}/tokenize_input.c \
 		 ${LEXER_PATH}/tokenize_lists.c \
@@ -53,7 +54,14 @@ HEREDOC := ${HEREDOC_PATH}/heredoc.c \
 		   ${HEREDOC_PATH}/heredoc_signals.c
 
 EXECUTION := ${EXECUTION_PATH}/execution.c \
-		   ${EXECUTION_PATH}/execution_utils.c
+		   ${EXECUTION_PATH}/execution_utils.c\
+		   ${EXECUTION_PATH}/builtins/cd.c\
+		   ${EXECUTION_PATH}/builtins/echo.c\
+		   ${EXECUTION_PATH}/builtins/env.c\
+		   ${EXECUTION_PATH}/builtins/exit.c\
+		   ${EXECUTION_PATH}/builtins/export.c\
+		   ${EXECUTION_PATH}/builtins/pwd.c\
+		   ${EXECUTION_PATH}/builtins/unset.c\
 
 SRC := 	${UTILS} \
 		${LEXER} \

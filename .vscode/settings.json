@@ -4,6 +4,7 @@
     "files.associations": {
         "readline.h": "c",
         "execution.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "minishell.h": "c"
     }
 }

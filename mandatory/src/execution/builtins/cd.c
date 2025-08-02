@@ -14,38 +14,24 @@ char	*ft_jm3_str(char *s1, char *s2, char *s3)
     return (res2);
 }
 
-void    ft_cd(char **arv, t_env **env)
+void    ft_cd(char **args, t_env **env)
 {
     char    *home;
     char    *error_str;
 
-    if (!arv[1])
+    if (!args[1])
     {
-        home = get_env_value("HOME", *env);
+        home = get_env_value(ft_strdup("HOME"), *env);
         if (!home || chdir(home))
             perror("Shellnobyl: cd:");
     }
-    else if (arv[2])
+    else if (args[2])
         perror("Shellnobyl: cd: too many arguments");
-    else if (chdir(arv[1]))
+    else if (chdir(args[1]))
     {
-        error_str = ft_jm3_str("Shellnobyl: cd: ", arv[1], ": No such file or directory");
+        error_str = ft_jm3_str("Shellnobyl: cd: ", args[1], ": No such file or directory");
         perror(error_str);
         free(error_str);
     }
 
-}
-
-int main(int arc, char **arv)
-{
-    t_env	*env;
-    
-	env = init_env();
-    if(!env)
-        return(1);
-    if(arc != 2)
-        return (1);
-    ft_pwd();
-    ft_cd(arv, env);
-    ft_pwd();
 }

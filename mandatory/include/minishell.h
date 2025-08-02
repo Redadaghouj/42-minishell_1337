@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/21 14:14:45 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/01 19:48:42 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
+int     ft_atoi(const char *nptr);
 char	*gnl(int fd, int i);
 
 /* MINISHELL UTILS */

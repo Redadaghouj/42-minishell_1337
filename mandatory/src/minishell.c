@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/17 19:07:37 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/02 16:40:38 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	process_line(char *input, t_env **env)
 	parser(token, &cmd);
 	expansion(*env, cmd);
 	handle_heredoc(cmd, *env);
-	print_cmd_list(cmd);
+	// print_cmd_list(cmd);
 	execution(env, cmd);
 	cleanup_resources(&token, &cmd, input);
 }
