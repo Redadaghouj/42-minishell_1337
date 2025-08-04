@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/02 15:21:29 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/04 04:24:42 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ void    ft_cd(char **args, t_env **env);
 void    ft_exit(char **args);
 void	ft_export(char **args, t_env **env);
 void	ft_unset(char **args, t_env **env);
+
+//utils
+int     is_valid_identifier(char *str);
 
 #endif
