@@ -6,34 +6,38 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/02 16:21:12 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/04 05:39:28 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../../include/execution.h"
 
 void	exec_external(t_env **env, t_cmd *cmd)
 {
-	(void) env;
-	(void) cmd;
-	return;
+	pid_t	pid;
+	char	**envp;
+	char	*cmd_path;
+
+	cmd_path = find_command_path(cmd->args[0], *env);
+	if (!cmd_path)
+	{
+		printf("%s: command not found\n", cmd->args[0]);
+		return;
+	}
+	envp = env_to_array(*env);
+	pid = fork();
+	if (pid == 0)
+	{
+		execve(cmd_path, cmd->args, envp);
+		perror("execve faild");
+		exit(127);
+	}
+	else if (pid > 0)
+		waitpid (pid, NULL, 0);
+	free (cmd_path);
+	free_array(envp);
 }
 
-static int	is_builtin(char *cmd)
-{
-	if (!cmd)
-		return(0);
-	if (!ft_strcmp(cmd, "echo")
-	||	!ft_strcmp(cmd, "cd")
-	||	!ft_strcmp(cmd, "pwd")
-	||	!ft_strcmp(cmd, "export")
-	||	!ft_strcmp(cmd, "unset")
-	||	!ft_strcmp(cmd, "env")
-	||	!ft_strcmp(cmd, "exit"))
-		return(1);
-	else
-		return (0);
-}
 static void	exec_builtin(t_env **env, t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->args[0], "echo"))

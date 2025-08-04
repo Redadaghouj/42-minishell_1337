@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/04 04:24:42 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/04 05:39:06 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void	ft_unset(char **args, t_env **env);
 
 //utils
 int     is_valid_identifier(char *str);
-
+int     is_builtin(char *cmd);
 #endif
