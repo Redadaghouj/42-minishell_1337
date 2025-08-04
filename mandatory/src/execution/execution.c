@@ -6,11 +6,39 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/04 05:39:28 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/04 06:44:46 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/execution.h"
+
+static char **env_to_array(t_env *env)
+{
+	char	**envp;
+	char	*temp;
+	t_env	*tmp;
+	int		count;
+	int		i;
+
+	count = count_and_allocate(env, &envp);
+	if (count == -1)
+		return (NULL);
+	i = 0;
+	tmp = env;
+	while (tmp && i < count)
+	{
+		if (tmp->value)
+		{
+			temp = ft_strjoin(tmp->key, "=");
+			envp[i] = ft_strjoin(temp, tmp->value);
+			free(tmp);
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	envp[i] = NULL;
+	return (envp);
+}
 
 void	exec_external(t_env **env, t_cmd *cmd)
 {

@@ -6,11 +6,26 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/04 06:05:54 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/04 07:08:13 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/execution.h"
+
+void	free_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
 
 int	is_builtin(char *cmd)
 {
@@ -31,22 +46,30 @@ int	is_builtin(char *cmd)
 static char *search_in_paths(char **paths, char *cmd)
 {
 	char	*full_path;
+	char	*tmp;
 	int		i;
 
 	i = 0;
 	while (paths[i])
 	{
-		full_path = build_full_path(paths[i], cmd);
+		tmp = ft_strjoin(paths[i], "/");
+		if (!tmp)
+		{
+			i++;
+			continue;
+		}
+		full_path = ft_strjoin(tmp, cmd);
 		if (!full_path)
 		{
 			i++;
 			continue;
 		}
-		if (accses(full_path, F_OK | X_OK) == 0)
+		if (access(full_path, F_OK | X_OK) == 0)
 			return (full_path);
 		free(full_path);
 		i++;
 	}
+	return (NULL);
 }
 
 char	*find_command_path(char *cmd, t_env *env)
@@ -69,7 +92,26 @@ char	*find_command_path(char *cmd, t_env *env)
 	paths = ft_split(path_env, ':');
 	if (!paths)
 		return(NULL);
-	result = search_in_path(paths, cmd);
+	result = search_in_paths(paths, cmd);
 	free_array(paths);
 	return (result);
+}
+
+int	count_and_allocate(t_env *env, char ***envp)
+{
+	t_env	*tmp;
+	int		count;
+	
+	count = 0;
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->value)
+			count++;
+		tmp = tmp->next;
+	}
+	*envp = (char **)malloc((count + 1) * sizeof(char *));
+	if (!*envp)
+		return (-1);
+	return (count);
 }
