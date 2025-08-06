@@ -8,8 +8,8 @@ char	*ft_jm3_str(char *s1, char *s2, char *s3)
     if (!s1 || !s2 || !s3)
         return (NULL);
     res2 = NULL;
-    res1 = ft_strjoin(s1, s2);
-    res2 = ft_strjoin(res2, s3);
+    res1 = rb_strjoin(s1, s2);
+    res2 = rb_strjoin(res2, s3);
     free(res1);
     return (res2);
 }
@@ -21,7 +21,7 @@ void    ft_cd(char **args, t_env **env)
 
     if (!args[1])
     {
-        home = get_env_value(ft_strdup("HOME"), *env);
+        home = rb_get_env_value("HOME", *env);
         if (!home || chdir(home))
             perror("Shellnobyl: cd:");
     }

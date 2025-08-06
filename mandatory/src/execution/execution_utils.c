@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/04 07:08:13 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/06 12:06:32 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,14 @@ static char *search_in_paths(char **paths, char *cmd)
 	i = 0;
 	while (paths[i])
 	{
-		tmp = ft_strjoin(paths[i], "/");
+		tmp = rb_strjoin(paths[i], "/");
 		if (!tmp)
 		{
 			i++;
 			continue;
 		}
-		full_path = ft_strjoin(tmp, cmd);
+		full_path = rb_strjoin(tmp, cmd);
+		free(tmp);
 		if (!full_path)
 		{
 			i++;
@@ -86,7 +87,7 @@ char	*find_command_path(char *cmd, t_env *env)
 			return (ft_strdup(cmd));
 		return (NULL);
 	}
-	path_env = get_env_value("PATH", env);
+	path_env = rb_get_env_value("PATH", env);
 	if (!path_env)
 		return (NULL);
 	paths = ft_split(path_env, ':');

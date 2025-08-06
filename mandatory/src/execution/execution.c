@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/04 06:44:46 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/05 23:51:04 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ static char **env_to_array(t_env *env)
 	{
 		if (tmp->value)
 		{
-			temp = ft_strjoin(tmp->key, "=");
-			envp[i] = ft_strjoin(temp, tmp->value);
-			free(tmp);
+			temp = rb_strjoin(tmp->key, "=");
+			envp[i] = rb_strjoin(temp, tmp->value);
+			free(temp);
 			i++;
 		}
 		tmp = tmp->next;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:03:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/14 14:10:27 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/06 11:57:12 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_env
 
 /* ENV */
 char	*get_env_value(char *var, t_env *env);
+char	*rb_get_env_value(char *var, t_env *env);
 t_env	*parse_env(void);
 
 /* ENV LISTS */
