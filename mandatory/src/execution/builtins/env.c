@@ -6,11 +6,11 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 12:36:50 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/07/23 12:57:21 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:55:20 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/execution.h"
+#include "../../../include/minishell.h"
 
 void    ft_env(t_env **env)
 {

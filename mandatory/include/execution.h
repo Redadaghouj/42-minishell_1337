@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/04 06:45:58 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:53:59 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define EXECUTION_H
 
 # include "env.h"
-# include "minishell.h"
+# include "parser.h"
 
 void	execution(t_env **env, t_cmd *cmd);
 

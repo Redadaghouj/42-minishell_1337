@@ -6,11 +6,11 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/06 12:06:32 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:56:36 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/execution.h"
+#include "../../include/minishell.h"
 
 void	free_array(char **array)
 {
@@ -80,14 +80,18 @@ char	*find_command_path(char *cmd, t_env *env)
 	char	*result;
 
 	if (!cmd)
-		return (NULL);
-	if (ft_strchr(cmd, '/'))
+	return (NULL);
+	path_env = rb_get_env_value(ft_strdup("PATH"), env);
+	if (ft_strchr(cmd, '/') || path_env == NULL)
 	{
-		if (access(cmd, F_OK | X_OK) == 0)
-			return (ft_strdup(cmd));
+		if (access(cmd, F_OK) == 0)
+		{
+			if (access(cmd, X_OK) == 0)
+				return (ft_strdup(cmd));
+			return(NULL); // bdlha l permetion denied 
+		}
 		return (NULL);
 	}
-	path_env = rb_get_env_value("PATH", env);
 	if (!path_env)
 		return (NULL);
 	paths = ft_split(path_env, ':');

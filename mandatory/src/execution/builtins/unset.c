@@ -6,11 +6,11 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:23:35 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/04 04:42:40 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:55:44 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/execution.h"
+#include "../../../include/minishell.h"
 
 static void remove_env_variable(char *key, t_env **env)
 {

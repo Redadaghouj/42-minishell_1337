@@ -6,11 +6,11 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:22:30 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/04 04:23:52 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:55:33 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/execution.h"
+#include "../../../include/minishell.h"
 
 static void	print_export_format(t_env *env)
 {

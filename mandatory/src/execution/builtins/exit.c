@@ -6,11 +6,11 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:14:16 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/02 16:29:52 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/06 19:55:26 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/execution.h"
+#include "../../../include/minishell.h"
 
 int	is_number(char *str)
 {

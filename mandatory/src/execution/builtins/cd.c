@@ -1,4 +1,5 @@
-#include "../../../include/execution.h"
+#include "../../../include/minishell.h"
+
 
 char	*ft_jm3_str(char *s1, char *s2, char *s3)
 {

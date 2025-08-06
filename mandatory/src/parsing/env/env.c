@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:31:17 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/06 12:07:55 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/06 18:40:37 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ char	*get_env_value(char *var, t_env *env)
 	{
 		if (ft_strcmp(var, env->key) == 0)
 		{
-			// free(var);
+			free(var);
 			return (env->value);
 		}
 		env = env->next;
 	}
-	// free(var);
+	free(var);
 	return (NULL);
 }
 
@@ -61,9 +61,11 @@ char	*rb_get_env_value(char *var, t_env *env)
 	{
 		if (ft_strcmp(var, env->key) == 0)
 		{
+			free(var);
 			return (env->value);
 		}
 		env = env->next;
 	}
+	free(var);
 	return (NULL);
 }
