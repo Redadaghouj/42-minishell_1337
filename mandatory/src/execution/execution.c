@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/06 19:56:41 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/07 14:20:01 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ void	exec_external(t_env **env, t_cmd *cmd)
 	cmd_path = find_command_path(cmd->args[0], *env);
 	if (!cmd_path)
 	{
-		printf("%s: command not found\n", cmd->args[0]);
-		return;
+        if (ft_strchr(cmd->args[0], '/') && access(cmd->args[0], F_OK) == 0)
+            printf("%s: Permission denied\n", cmd->args[0]);
+        else
+            printf("%s: command not found\n", cmd->args[0]);
+        return ;
 	}
 	envp = env_to_array(*env);
 	pid = fork();
