@@ -34,9 +34,9 @@ static int	handle_output_redir(t_redir *redir)
 	if (redir->type == REDIR_OUTPUT)
 		flags = O_WRONLY | O_CREAT | O_TRUNC;
 	else if (redir->type == REDIR_APPEND)
-		flags = O_WRONLY | O_CREAT | O_TRUNC;
+		flags = O_WRONLY | O_CREAT | O_APPEND;
 	else
-		return;
+		return (-1);
 	fd = open(redir->file_delim, flags, 0644);
 	if (fd == -1)
 	{
@@ -64,11 +64,15 @@ int	setup_redirections(t_cmd *cmd)
 	while (current)
 	{
 		if (current->type == REDIR_INPUT || current->type == REDIR_HEREDOC)
+		{
 			if (handle_input_redir(current) == -1)
 				return (-1);
+		}
 		else if (current->type == REDIR_OUTPUT || current->type == REDIR_APPEND)
+		{
 			if (handle_output_redir(current) == -1)
 				return (-1);
+		}
 		current = current->next;
 	}
 	return (0);

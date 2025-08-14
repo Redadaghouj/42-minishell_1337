@@ -63,6 +63,8 @@ EXECUTION := ${EXECUTION_PATH}/execution.c \
 		   ${EXECUTION_PATH}/builtins/export.c\
 		   ${EXECUTION_PATH}/builtins/pwd.c\
 		   ${EXECUTION_PATH}/builtins/unset.c\
+		   ${EXECUTION_PATH}/pipe/pipe.c\
+		   ${EXECUTION_PATH}/redirection/redir.c\
 
 SRC := 	${UTILS} \
 		${LEXER} \

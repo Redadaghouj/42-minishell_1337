@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/08 13:55:49 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/08 14:51:21 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@
 # include <errno.h>
 
 void	execution(t_env **env, t_cmd *cmd);
+void	exec_builtin(t_env **env, t_cmd *cmd);
+void	exec_external_child(t_env **env, t_cmd *cmd);
 int     setup_redirections(t_cmd *cmd);
+void    execute_pipeline(t_env **env, t_cmd *cmd_list);
 
 //builtins :
 void	ft_export(char **args, t_env **env);

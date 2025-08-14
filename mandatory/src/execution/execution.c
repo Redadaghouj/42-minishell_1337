@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/07 14:20:01 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/10 16:41:17 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,30 @@ void	exec_external(t_env **env, t_cmd *cmd)
 	free_array(envp);
 }
 
-static void	exec_builtin(t_env **env, t_cmd *cmd)
+void	exec_external_child(t_env **env, t_cmd *cmd)
+{
+    char	**envp;
+    char	*cmd_path;
+
+    cmd_path = find_command_path(cmd->args[0], *env);
+    if (!cmd_path)
+    {
+        if (ft_strchr(cmd->args[0], '/') && access(cmd->args[0], F_OK) == 0)
+            ft_putstr_fd("Permission denied\n", STDERR_FILENO);
+        else
+		{
+            ft_putstr_fd(cmd->args[0], STDERR_FILENO);
+            ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		}
+        exit(127);
+    }
+    envp = env_to_array(*env);
+    execve(cmd_path, cmd->args, envp);
+    perror("execve");
+    exit(127);
+}
+
+void	exec_builtin(t_env **env, t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->args[0], "echo"))
 		ft_echo(cmd->args);
@@ -93,17 +116,17 @@ void	execution(t_env **env, t_cmd *cmd)
 	if (!cmd || !env || !*env)
 		return;
 	tmp = cmd;
-	while (tmp)
+	if (tmp->next)
 	{
-		if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
-		{
-			tmp = tmp->next;
-			continue;
-		}
-		if (is_builtin(tmp->args[0]))
-			exec_builtin(env, tmp);
-		else
-			exec_external(env, tmp);
-		tmp = tmp->next;
+		execute_pipeline(env, tmp);
+		return;
 	}
+	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
+		return;
+	if (setup_redirections(tmp) == -1)
+		return;
+	if (is_builtin(tmp->args[0]))
+		exec_builtin(env, tmp);
+	else
+		exec_external(env, tmp);
 }
