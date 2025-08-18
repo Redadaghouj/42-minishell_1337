@@ -82,6 +82,8 @@ int	setup_redirections(t_cmd *cmd)
 {
     t_redir	*cur;
 
+	if (!cmd || !cmd->redir)  // Fix: check if redir exists
+        return (0);
     cur = cmd->redir;
     while (cur)
     {

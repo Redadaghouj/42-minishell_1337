@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/15 17:22:40 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/18 18:30:34 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,55 +109,26 @@ void	exec_builtin(t_env **env, t_cmd *cmd)
 	else if (!ft_strcmp(cmd->args[0], "exit"))
 		ft_exit(cmd->args);
 }
-// void	execution(t_env **env, t_cmd *cmd)
-// {
-// 	t_cmd   *tmp;
-
-// 	if (!cmd || !env || !*env)
-// 		return;
-// 	tmp = cmd;
-// 	if (tmp->next)
-// 	{
-// 		execute_pipeline(env, tmp);
-// 		return;
-// 	}
-// 	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
-// 		return;
-// 	if (setup_redirections(tmp) == -1)
-// 		return;
-// 	if (is_builtin(tmp->args[0]))
-// 		exec_builtin(env, tmp);
-// 	else
-// 		exec_external(env, tmp);
-// }
 
 void	execution(t_env **env, t_cmd *cmd)
 {
-    int	original_stdin;
-    int	original_stdout;
+	t_cmd   *tmp;
 
-    if (!cmd || !env || !*env)
-        return;
-    if (!cmd->args || !cmd->args[0] || !cmd->args[0][0])
-        return;
-
-    // Save original file descriptors
-    original_stdin = dup(STDIN_FILENO);
-    original_stdout = dup(STDOUT_FILENO);
-
-    // Apply redirections
-    if (setup_redirections(cmd) == -1)
-        return;
-
-    // Execute command
-    if (is_builtin(cmd->args[0]))
-        exec_builtin(env, cmd);
-    else
-        exec_external(env, cmd);
-
-    // Restore original file descriptors
-    dup2(original_stdin, STDIN_FILENO);
-    dup2(original_stdout, STDOUT_FILENO);
-    close(original_stdin);
-    close(original_stdout);
+	if (!cmd || !env || !*env)
+		return;
+	tmp = cmd;
+	if (tmp->next)
+	{
+		execute_pipeline(env, tmp);
+		return;
+	}
+	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
+		return;
+	if (setup_redirections(tmp) == -1)
+		return;
+	if (is_builtin(tmp->args[0]))
+		exec_builtin(env, tmp);
+	else
+		exec_external(env, tmp);
 }
+

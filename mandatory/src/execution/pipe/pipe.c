@@ -1,5 +1,21 @@
 #include "../../../include/minishell.h"
 
+static int	has_output_redir(t_cmd *cmd)
+{
+    t_redir	*redir;
+
+    if (!cmd || !cmd->redir)
+        return (0);
+    redir = cmd->redir;
+    while (redir)
+    {
+        if (redir->type == REDIR_OUTPUT || redir->type == REDIR_APPEND)
+            return (1);
+        redir = redir->next;
+    }
+    return (0);
+}
+
 // static void    child_process(t_cmd *cmd, int prev_fd, int pipe_fd[2], t_env **env)
 // {
 //     if (prev_fd != -1)
@@ -25,44 +41,28 @@
 
 static void	child_process(t_cmd *cmd, int prev_fd, int pipe_fd[2], t_env **env)
 {
-    int	original_stdin;
-    int	original_stdout;
-
-    // Save original file descriptors
-    original_stdin = dup(STDIN_FILENO);
-    original_stdout = dup(STDOUT_FILENO);
-
-    // Handle input from previous pipe
     if (prev_fd != -1)
     {
         dup2(prev_fd, STDIN_FILENO);
         close(prev_fd);
     }
-
-    // Handle output to next pipe
-    if (cmd->next)
+    if (cmd->next && !has_output_redir(cmd))
     {
         close(pipe_fd[0]);
         dup2(pipe_fd[1], STDOUT_FILENO);
         close(pipe_fd[1]);
     }
-
-    // Apply redirections
+    else if (cmd->next)
+    {
+        close(pipe_fd[0]);
+        close(pipe_fd[1]);
+    }
     if (setup_redirections(cmd) == -1)
         exit(1);
-
-    // Execute command
     if (is_builtin(cmd->args[0]))
         exec_builtin(env, cmd);
     else
         exec_external_child(env, cmd);
-
-    // Restore original file descriptors
-    dup2(original_stdin, STDIN_FILENO);
-    dup2(original_stdout, STDOUT_FILENO);
-    close(original_stdin);
-    close(original_stdout);
-
     exit(0);
 }
 
