@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:34:14 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/18 17:45:24 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	expander_magic(t_expander *exp, char *value, int *i, t_env *env)
 
 void	skip_and_join(t_expander *exp, char *value, int *i)
 {
-	if (value[*i] == '$')
+	if (value[*i] == '$' && !exp->dquote && !exp->squote)
 	{
 		if (ft_isdigit(value[*i + 1]))
 			*i += 2;

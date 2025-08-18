@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/02 16:40:38 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:52:34 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	run_script_shell(t_env **env)
 
 	while (true)
 	{
-		input = gnl(STDIN_FILENO, 0);
+		input = get_next_line(STDIN_FILENO);
 		if (!input)
 			break ;
 		process_line(input, env);

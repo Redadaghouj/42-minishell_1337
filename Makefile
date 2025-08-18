@@ -31,8 +31,9 @@ UTILS := ${UTILS_PATH}/ft_strcmp.c \
 		 ${UTILS_PATH}/ft_split.c \
 		 ${UTILS_PATH}/ft_strchr.c \
 		 ${UTILS_PATH}/ft_putstr_fd.c \
-		 ${UTILS_PATH}/ft_gnl.c \
 		 ${UTILS_PATH}/ft_atoi.c \
+         $(UTILS_PATH)/gnl/get_next_line.c \
+         $(UTILS_PATH)/gnl/get_next_line_utils.c
 
 LEXER := ${LEXER_PATH}/tokenize_input.c \
 		 ${LEXER_PATH}/tokenize_lists.c \

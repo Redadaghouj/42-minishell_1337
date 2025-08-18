@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:39:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/17 23:29:04 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/18 17:50:52 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	child_process(t_redir *node, t_env *env)
 	while (true)
 	{
 		ft_putstr_fd("> ", STDOUT_FILENO);
-		line = gnl(STDIN_FILENO, 0);
+		line = get_next_line(STDIN_FILENO);
 		if (!line || !ft_strcmp(line, node->file_delim))
 		{
 			if (!line)
