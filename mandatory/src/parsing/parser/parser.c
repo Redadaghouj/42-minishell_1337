@@ -3,46 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:22:31 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/14 14:24:19 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/20 22:13:31 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void print_args(char **args)
+void	print_args(char **args)
 {
-    int i = 0;
-    while (args && args[i])
-    {
-        printf("args[%d]: %s\n", i, args[i]);
-        i++;
-    }
-    printf("args[%d]: NULL\n", i);
+	int i;
+
+	i = 0;
+	while (args && args[i])
+	{
+		printf("args[%d]: %s\n", i, args[i]);
+		i++;
+	}
+	printf("args[%d]: NULL\n", i);
 }
 
-char  *return_type(unsigned int type)
+char	*return_type(unsigned int type)
 {
 	if (type == TOKEN_HEREDOC)
-		return("<<");
+		return ("<<");
 	else if (type == TOKEN_APPEND_OUT)
 		return(">>");
 	else if (type == TOKEN_REDIR_IN)
-		return("<");
+		return ("<");
 	else if (type == TOKEN_REDIR_OUT)
-		return(">");
+		return (">");
 	else
-		return("NON");
+		return ("NON");
 }
 
 void	print_redirs(t_redir *redir)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (redir)
 	{
-		printf("  redir[%d]: file='%s', type='%s'\n", i, redir->file_delim, return_type(redir->type));
+		printf("  redir[%d]: file='%s', type='%s'\n",
+				i, redir->file_delim, return_type(redir->type));
 		redir = redir->next;
 		i++;
 	}
@@ -52,12 +57,12 @@ void	print_redirs(t_redir *redir)
 
 void	print_cmd_list(t_cmd *cmd)
 {
-	int cmd_i = 0;
+	int cmd_i;
+
+	cmd_i = 0;
 	while (cmd)
 	{
 		printf("cmd[%d]:\n", cmd_i);
-
-		// Print args
 		if (cmd->args)
 		{
 			for (int i = 0; cmd->args[i]; i++)
@@ -65,10 +70,7 @@ void	print_cmd_list(t_cmd *cmd)
 		}
 		else
 			printf("  no args\n");
-
-		// Print redirs
 		print_redirs(cmd->redir);
-
 		cmd = cmd->next;
 		cmd_i++;
 	}

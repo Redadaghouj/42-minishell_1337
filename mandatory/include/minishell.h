@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/18 17:50:01 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:33:50 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define EXIT_SUCCESS 0
 
 extern char	**environ;
+extern int	g_exit_status;
 
 /* UTILS */
 int		ft_strcmp(char *s1, char *s2);
@@ -47,7 +48,7 @@ void	ft_putstr_fd(char *s, int fd);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
-int     ft_atoi(const char *nptr);
+int		ft_atoi(const char *nptr);
 char	*get_next_line(int fd);
 char	*rb_strjoin(char *s1, char *s2);
 

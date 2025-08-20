@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/20 22:26:02 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/20 21:57:18 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,11 @@ void	exec_external_child(t_env **env, t_cmd *cmd)
 
 void	exec_builtin(t_env **env, t_cmd *cmd)
 {
+	int saved_stdout;
+
+	saved_stdout = dup(STDOUT_FILENO);
+	if (setup_redirection(cmd) == -1)
+			return;
 	if (!ft_strcmp(cmd->args[0], "echo"))
 		ft_echo(cmd->args);
 	else if (!ft_strcmp(cmd->args[0], "cd"))
@@ -110,6 +115,8 @@ void	exec_builtin(t_env **env, t_cmd *cmd)
 		ft_unset(cmd->args, env);
 	else if (!ft_strcmp(cmd->args[0], "exit"))
 		ft_exit(cmd->args);
+	dup2(saved_stdout, STDOUT_FILENO);
+	close(saved_stdout);
 }
 
 void	execution(t_env **env, t_cmd *cmd)
