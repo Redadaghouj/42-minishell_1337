@@ -6,17 +6,12 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/18 20:12:18 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:26:25 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
-
-# define REDIR_INPUT	1
-# define REDIR_OUTPUT	2
-# define REDIR_APPEND	3
-# define REDIR_HEREDOC	4
 
 # include "env.h"
 # include "parser.h"
@@ -27,7 +22,7 @@
 void	execution(t_env **env, t_cmd *cmd);
 void	exec_builtin(t_env **env, t_cmd *cmd);
 void	exec_external_child(t_env **env, t_cmd *cmd);
-int     setup_redirections(t_cmd *cmd);
+int     setup_redirection(t_cmd *cmd);
 void    execute_pipeline(t_env **env, t_cmd *cmd_list);
 
 //builtins :

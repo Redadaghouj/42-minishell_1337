@@ -9,7 +9,7 @@ static int	has_output_redir(t_cmd *cmd)
     redir = cmd->redir;
     while (redir)
     {
-        if (redir->type == REDIR_OUTPUT || redir->type == REDIR_APPEND)
+        if (redir->type == TOKEN_REDIR_OUT || redir->type == TOKEN_APPEND_OUT)
             return (1);
         redir = redir->next;
     }
@@ -57,7 +57,7 @@ static void	child_process(t_cmd *cmd, int prev_fd, int pipe_fd[2], t_env **env)
         close(pipe_fd[0]);
         close(pipe_fd[1]);
     }
-    if (setup_redirections(cmd) == -1)
+    if (setup_redirection(cmd) == -1)
         exit(1);
     if (is_builtin(cmd->args[0]))
         exec_builtin(env, cmd);

@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/18 18:30:34 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/20 22:26:02 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	exec_external(t_env **env, t_cmd *cmd)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (setup_redirection(cmd) == -1)
+			return;
 		execve(cmd_path, cmd->args, envp);
 		perror("execve faild");
 		exit(127);
@@ -123,8 +125,6 @@ void	execution(t_env **env, t_cmd *cmd)
 		return;
 	}
 	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
-		return;
-	if (setup_redirections(tmp) == -1)
 		return;
 	if (is_builtin(tmp->args[0]))
 		exec_builtin(env, tmp);
