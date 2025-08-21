@@ -86,6 +86,8 @@ int	setup_redirection(t_cmd *cmd)
     cur = cmd->redir;
     while (cur)
     {
+		if (is_redir_ambiguous(cur))
+			return (-1);
         if (cur->type == TOKEN_REDIR_IN || cur->type == TOKEN_HEREDOC)
         {
             if (handle_input_redir(cur) == -1)

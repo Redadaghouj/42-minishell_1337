@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/20 22:10:18 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/21 13:42:54 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
+
+# define ERR_AMBIGUOUS_REDIRECT \
+		"Shellnobyl: ambiguous redirect\n"
 
 void	execution(t_env **env, t_cmd *cmd);
 void	exec_builtin(t_env **env, t_cmd *cmd);
@@ -39,5 +42,8 @@ char	*find_command_path(char *cmd, t_env *env);
 int		is_valid_identifier(char *str);
 void	free_array(char **array);
 int		is_builtin(char *cmd);
+
+/* AMBIGUOUS REDIR */
+bool	is_redir_ambiguous(t_redir *redir);
 
 #endif

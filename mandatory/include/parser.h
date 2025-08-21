@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:46:12 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/19 23:09:38 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/21 13:42:46 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include "lexer.h"
 
+# define SQUOTE '\''
+# define DQUOTE '"'
 # define ERR_UNCLOSED_QUOTES \
 		"Shellnobyl: unexpected EOF while looking for matching "
 # define ERR_EMPTY_PIPE_UNEXPECTED_TOKEN \

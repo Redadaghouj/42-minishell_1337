@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:39:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/20 22:31:28 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/21 12:37:34 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,9 @@
 void	should_heredoc_expand(t_redir *node)
 {
 	char	*value;
-	int		len;
 
 	value = node->file_delim;
-	len = ft_strlen(value) - 1;
-	if (value[0] == '"' && value[1] == '"')
-		node->should_expand = false;
-	else if (value[len] == '"' && value[len - 1] == '"')
-		node->should_expand = false;
-	else if (value[0] == '\'' && value[1] == '\'')
-		node->should_expand = false;
-	else if (value[len] == '\'' && value[len - 1] == '\'')
+	if (ft_strchr(value, '"') || ft_strchr(value, '\''))
 		node->should_expand = false;
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_input.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 10:41:06 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/21 12:36:10 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	lexer(char *input, t_token **list)
 	quote = 0;
 	while (input[i])
 	{
-		if ((input[i] == '\'' || input[i] == '"') && !quote)
+		if ((input[i] == SQUOTE || input[i] == DQUOTE) && !quote)
 			quote = input[i];
 		else if (quote == input[i])
 			quote = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   append_args.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:04:55 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/21 12:36:10 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ bool	should_split(char *exp_value, bool space, bool squote, bool dquote)
 		{
 			if (exp_value[i] == ' ')
 				space = true;
-			if (exp_value[i] == '\'' && !dquote)
+			if (exp_value[i] == SQUOTE && !dquote)
 				squote = !squote;
-			else if (exp_value[i] == '"' && !squote)
+			else if (exp_value[i] == DQUOTE && !squote)
 				dquote = !dquote;
 		}
 		i++;

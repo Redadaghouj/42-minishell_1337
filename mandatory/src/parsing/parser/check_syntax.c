@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 20:23:48 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/17 19:14:12 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/21 12:36:10 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	unclosed_quotes(char *value)
 	i = -1;
 	while (value[++i])
 	{
-		if ((value[i] == '\'' || value[i] == '"') && !quote)
+		if ((value[i] == SQUOTE || value[i] == DQUOTE) && !quote)
 		{
 			quote = value[i];
 			continue ;

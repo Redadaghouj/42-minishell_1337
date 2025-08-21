@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:34:14 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/18 17:45:24 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/21 12:36:10 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	skip_and_join(t_expander *exp, char *value, int *i)
 	{
 		if (ft_isdigit(value[*i + 1]))
 			*i += 2;
-		else if (value[*i + 1] == '\'' || value[*i + 1] == '"')
+		else if (value[*i + 1] == SQUOTE || value[*i + 1] == DQUOTE)
 			*i += 1;
 	}
 	exp->output = append_char(exp->output, value[*i]);
@@ -50,7 +50,7 @@ char	*expand_var(char *value, t_env *env_lst)
 	init_expander(&exp);
 	while (value[i])
 	{
-		if (value[i] == '\'' && !exp.dquote)
+		if (value[i] == SQUOTE && !exp.dquote)
 			handle_quotes(&exp, value[i], true);
 		else if (value[i] == '\"' && !exp.squote)
 			handle_quotes(&exp, value[i], false);

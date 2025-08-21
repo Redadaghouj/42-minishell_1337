@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/20 22:34:53 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/21 13:32:41 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	g_exit_status;
 
-g_exit_status = 0;
+// g_exit_status = 0;
 void	cleanup_resources(t_token **token, t_cmd **cmd, char *input)
 {
 	ft_lstclear_token(token);
@@ -33,7 +33,6 @@ void	process_line(char *input, t_env **env)
 	parser(token, &cmd);
 	expansion(*env, cmd);
 	handle_heredoc(cmd, *env);
-	// print_cmd_list(cmd);
 	execution(env, cmd);
 	cleanup_resources(&token, &cmd, input);
 }

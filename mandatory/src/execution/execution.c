@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/20 21:57:18 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/21 12:58:56 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ void	exec_external(t_env **env, t_cmd *cmd)
 	if (pid == 0)
 	{
 		if (setup_redirection(cmd) == -1)
-			return;
+			return ;
 		execve(cmd_path, cmd->args, envp);
-		perror("execve faild");
+		perror("execve failed");
 		exit(127);
 	}
 	else if (pid > 0)
@@ -94,13 +94,34 @@ void	exec_external_child(t_env **env, t_cmd *cmd)
     exit(127);
 }
 
+bool	setup_with_backup(t_cmd *cmd, int *save_stdout, int *save_stdin)
+{
+	*save_stdout = dup(STDOUT_FILENO);
+	*save_stdin = dup(STDIN_FILENO);
+	if (setup_redirection(cmd) == -1)
+	{
+		close(*save_stdout);
+		close(*save_stdin);
+		return (false);
+	}
+	return (true);
+}
+
+void	restore_stdio(int save_stdout, int save_stdin)
+{
+	dup2(save_stdout, STDOUT_FILENO);
+	dup2(save_stdin, STDIN_FILENO);
+	close(save_stdin);
+	close(save_stdout);
+}
+
 void	exec_builtin(t_env **env, t_cmd *cmd)
 {
-	int saved_stdout;
+	int	save_stdout;
+	int	save_stdin;
 
-	saved_stdout = dup(STDOUT_FILENO);
-	if (setup_redirection(cmd) == -1)
-			return;
+	if (!setup_with_backup(cmd, &save_stdout, &save_stdin))
+		return ;
 	if (!ft_strcmp(cmd->args[0], "echo"))
 		ft_echo(cmd->args);
 	else if (!ft_strcmp(cmd->args[0], "cd"))
@@ -115,8 +136,7 @@ void	exec_builtin(t_env **env, t_cmd *cmd)
 		ft_unset(cmd->args, env);
 	else if (!ft_strcmp(cmd->args[0], "exit"))
 		ft_exit(cmd->args);
-	dup2(saved_stdout, STDOUT_FILENO);
-	close(saved_stdout);
+	restore_stdio(save_stdout, save_stdin);
 }
 
 void	execution(t_env **env, t_cmd *cmd)

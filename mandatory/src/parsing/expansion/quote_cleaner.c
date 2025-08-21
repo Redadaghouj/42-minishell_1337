@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_cleaner.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:31:18 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/21 12:36:10 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ char	*remove_grouping_quotes(char *val)
 	cleaned_str = ft_strdup("");
 	while (val[i])
 	{
-		if (val[i] == '\'' && !dquote)
+		if (val[i] == SQUOTE && !dquote)
 			squote = !squote;
-		else if (val[i] == '"' && !squote)
+		else if (val[i] == DQUOTE && !squote)
 			dquote = !dquote;
 		else
 			cleaned_str = append_char(cleaned_str, val[i]);
@@ -41,6 +41,8 @@ void	unquote_redir(t_redir *redir)
 {
 	while (redir)
 	{
+		if (redir->file_delim[0] == SQUOTE || redir->file_delim[0] == DQUOTE)
+			redir->should_expand = false;
 		redir->file_delim = remove_grouping_quotes(redir->file_delim);
 		redir = redir->next;
 	}
