@@ -53,35 +53,11 @@ static int	handle_output_redir(t_redir *redir)
 	return (0);
 }
 
-// int	setup_redirections(t_cmd *cmd)
-// {
-// 	t_redir	*current;
-
-// 	if (!cmd || !cmd->redir)
-// 		return (0);
-// 	current = cmd->redir;
-// 	while (current)
-// 	{
-// 		if (current->type == REDIR_INPUT || current->type == REDIR_HEREDOC)
-// 		{
-// 			if (handle_input_redir(current) == -1)
-// 				return (-1);
-// 		}
-// 		else if (current->type == REDIR_OUTPUT || current->type == REDIR_APPEND)
-// 		{
-// 			if (handle_output_redir(current) == -1)
-// 				return (-1);
-// 		}
-// 		current = current->next;
-// 	}
-// 	return (0);
-// }
-
 int	setup_redirection(t_cmd *cmd)
 {
     t_redir	*cur;
 
-	if (!cmd || !cmd->redir)  // Fix: check if redir exists
+	if (!cmd || !cmd->redir)
         return (0);
     cur = cmd->redir;
     while (cur)

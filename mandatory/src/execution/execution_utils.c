@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/20 22:17:20 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/21 13:36:30 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,9 @@ int	count_and_allocate(t_env *env, char ***envp)
 	}
 	*envp = (char **)malloc((count + 1) * sizeof(char *));
 	if (!*envp)
+	{
+		free(*envp);
 		return (-1);
+	}
 	return (count);
 }

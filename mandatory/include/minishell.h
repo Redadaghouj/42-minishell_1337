@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/20 22:33:50 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/21 13:07:41 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define EXIT_SUCCESS 0
 
 extern char	**environ;
-extern int	g_exit_status;
 
 /* UTILS */
 int		ft_strcmp(char *s1, char *s2);
