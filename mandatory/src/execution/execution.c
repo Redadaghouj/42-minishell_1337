@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/21 12:58:56 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/22 16:27:19 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	exec_external(t_env **env, t_cmd *cmd)
 	if (pid == 0)
 	{
 		if (setup_redirection(cmd) == -1)
-			return ;
+			exit(1);
 		execve(cmd_path, cmd->args, envp);
 		perror("execve failed");
 		exit(127);
