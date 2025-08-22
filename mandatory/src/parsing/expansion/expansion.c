@@ -6,7 +6,7 @@
 /*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:34:14 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/21 12:36:10 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/22 21:00:03 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,13 @@ void	expansion(t_env *env_lst, t_cmd *cmd)
 		while (ptr->args[i])
 		{
 			exp_value = expand_var(ptr->args[i], env_lst);
-			if (should_split(exp_value, false, false, false))
+			if (should_split(exp_value, false, false, false))	
 				ptr->args = append_args(ptr->args, exp_value, &i, 0);
 			else
+			{
 				ptr->args[i] = exp_value;
-			i++;
+				i++;
+			}
 		}
 		expand_redir(ptr->redir, env_lst);
 		ptr = ptr->next;
