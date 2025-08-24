@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:40:12 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/15 19:06:25 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/24 01:39:09 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define SIGINT_KILLED 130
 
 /* HEREDOC */
+int		handle_heredoc(t_shell *shell);
 void	should_heredoc_expand(t_redir *node);
-int		handle_heredoc(t_cmd *cmd, t_env *env);
 
 /* HEREDOC SIGNALS */
 void	handle_heredoc_sigint(int signum);

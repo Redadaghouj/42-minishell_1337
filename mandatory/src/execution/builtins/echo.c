@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 21:09:56 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/06 19:55:15 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 06:07:28 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ int		is_n_flag(char *str)
 	return (1);
 }
 
-void	ft_echo(char **arv)
+void	ft_echo(t_shell *shell)
 {
-	int	new_linef;
 	int	i;
+	int	new_linef;
+	char	**arv;
 
 	i = 1;
 	new_linef = 1;
+	arv = shell->cmd->args;
 	while (arv[i] && is_n_flag(arv[i]))
 	{
 		new_linef = 0;
@@ -49,4 +51,5 @@ void	ft_echo(char **arv)
 	}
 	if (new_linef)
 		ft_putstr_fd("\n", 1);
+	shell->exit_status = EXIT_SUCCESS;
 }

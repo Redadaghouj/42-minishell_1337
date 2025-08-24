@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:46:12 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/21 13:42:46 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 02:43:51 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PARSER_H
 
 # include "lexer.h"
+
+typedef struct s_shell t_shell;
 
 # define SQUOTE '\''
 # define DQUOTE '"'
@@ -45,7 +47,7 @@ typedef struct s_cmd
 }	t_cmd;
 
 /* PARSER */
-void	parser(t_token *list, t_cmd **cmd);
+void	parser(t_token *list, t_shell *shell);
 void	fill_redir(t_token *list, t_cmd **node, int redir_nbr);
 
 /* PARSER LISTS */

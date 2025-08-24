@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/21 13:07:41 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 03:45:46 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,22 @@
 # include "heredoc.h"
 # include "execution.h"
 
-# define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0
+# define EXIT_FAILURE 1
+# define EXIT_AMBIGUOUS_REDIR 1
+# define EXIT_SYNTAX 2
+# define EXIT_PERMISSION 126
+# define EXIT_CMD_NOT_FOUND 127
+# define EXIT_SIGINT 130
 
 extern char	**environ;
+
+typedef struct s_shell
+{
+	t_cmd	*cmd;
+	t_env	*env;
+	int		exit_status;
+}	t_shell;
 
 /* UTILS */
 int		ft_strcmp(char *s1, char *s2);
@@ -48,6 +60,7 @@ int		ft_isalnum(int c);
 int		ft_isdigit(int c);
 int		ft_isalpha(int c);
 int		ft_atoi(const char *nptr);
+char	*ft_itoa(int n);
 char	*get_next_line(int fd);
 char	*rb_strjoin(char *s1, char *s2);
 

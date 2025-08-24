@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:23:35 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/06 19:55:44 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 05:30:16 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,34 @@ static void remove_env_variable(char *key, t_env **env)
     }
 }
 
-static void unset_variable(char *arg, t_env **env)
+static void unset_variable(char *arg, t_shell *shell)
 {
     if (is_valid_identifier(arg))
-        remove_env_variable(arg, env);
+	{
+		shell->exit_status = EXIT_SUCCESS;
+        remove_env_variable(arg, &shell->env);
+	}
     else
+	{
+		shell->exit_status = EXIT_FAILURE;
         printf("Shellnobyl: unset: `%s': not a valid identifier\n", arg);
+	}
 }
 
-void	ft_unset(char **args, t_env **env)
+void	ft_unset(t_shell *shell)
 {
-    int i;
+    int 	i;
+	char	**args;
 
-    if (!args || !env || !*env)
-        return;
-    if (!args[1])
-        return;
+    if (!shell || !shell->env)
+		return ;
+	args = shell->cmd->args;
+    if (!args || !args[1])
+        return ;
     i = 1;
     while (args[i])
     {
-        unset_variable(args[i], env);
+        unset_variable(args[i], shell);
         i++;
     }
 }

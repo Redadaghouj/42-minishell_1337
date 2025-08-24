@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_signals.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 02:09:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/07/15 19:16:56 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/24 03:38:43 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	handle_heredoc_sigint(int signum)
 	ft_putstr_fd("\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	exit(SIGINT_KILLED);
+	exit(EXIT_SIGINT);
 }
 
 void	setup_heredoc_signals(void)

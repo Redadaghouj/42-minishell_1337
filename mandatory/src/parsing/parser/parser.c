@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:22:31 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/20 22:13:31 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 02:43:42 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ t_token	*fill_redir_and_skip(t_token *list, t_cmd **node, int redir_nbr, int j)
 	return (list);
 }
 
-void	parser(t_token *list, t_cmd **cmd)
+void	parser(t_token *list, t_shell *shell)
 {
 	int		i;
 	int		j;
@@ -169,10 +169,12 @@ void	parser(t_token *list, t_cmd **cmd)
 				while (i-- > 0 && list->type == TOKEN_WORD)
 					list = list->next;
 				list = fill_redir_and_skip(list, &node, redir_nbr, j);
-				ft_lstadd_back_cmd(cmd, node);
+				ft_lstadd_back_cmd(&shell->cmd, node);
 			}
 			else
 				list = list->next;
 		}
 	}
+	else
+		shell->exit_status = EXIT_SYNTAX;
 }

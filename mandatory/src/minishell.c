@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/21 13:32:41 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 02:43:53 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	g_exit_status;
+int	g_signals;
 
-// g_exit_status = 0;
 void	cleanup_resources(t_token **token, t_cmd **cmd, char *input)
 {
 	ft_lstclear_token(token);
@@ -22,22 +21,21 @@ void	cleanup_resources(t_token **token, t_cmd **cmd, char *input)
 	free(input);
 }
 
-void	process_line(char *input, t_env **env)
+void	process_line(char *input, t_shell *shell)
 {
 	t_token	*token;
-	t_cmd	*cmd;
 
 	token = NULL;
-	cmd = NULL;
+	shell->cmd = NULL;
 	lexer(input, &token);
-	parser(token, &cmd);
-	expansion(*env, cmd);
-	handle_heredoc(cmd, *env);
-	execution(env, cmd);
-	cleanup_resources(&token, &cmd, input);
+	parser(token, shell);
+	expansion(shell);
+	handle_heredoc(shell);
+	execution(shell);
+	cleanup_resources(&token, &shell->cmd, input);
 }
 
-void	run_interactive_shell(t_env **env)
+void	run_interactive_shell(t_shell *shell)
 {
 	char	*input;
 
@@ -50,12 +48,12 @@ void	run_interactive_shell(t_env **env)
 		if (*input)
 		{
 			add_history(input);
-			process_line(input, env);
+			process_line(input, shell);
 		}
 	}
 }
 
-void	run_script_shell(t_env **env)
+void	run_script_shell(t_shell *shell)
 {
 	char	*input;
 
@@ -64,21 +62,22 @@ void	run_script_shell(t_env **env)
 		input = get_next_line(STDIN_FILENO);
 		if (!input)
 			break ;
-		process_line(input, env);
+		process_line(input, shell);
 	}
 }
 
 int	main(void)
 {
-	t_env	*env;
+	t_shell	shell;
 
-	env = init_env();
-	if (!env)
+	shell.env = init_env();
+	shell.exit_status = 0;
+	if (!shell.env)
 		return (EXIT_FAILURE);
 	else if (isatty(STDIN_FILENO))
-		run_interactive_shell(&env);
+		run_interactive_shell(&shell);
 	else
-		run_script_shell(&env);
-	ft_lstclear_env(&env);
+		run_script_shell(&shell);
+	ft_lstclear_env(&shell.env);
 	return (EXIT_SUCCESS);
 }

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 12:36:50 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/06 19:55:20 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 04:38:42 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-void    ft_env(t_env **env)
+void    ft_env(t_shell *shell)
 {
 	t_env   *tmp;
 
-	tmp = *env;
+	tmp = shell->env;
 	while(tmp)
 	{
 		if (tmp->value)
@@ -28,4 +28,5 @@ void    ft_env(t_env **env)
 		}
 		tmp  = tmp->next;
 	}
+	shell->exit_status = EXIT_SUCCESS;
 }

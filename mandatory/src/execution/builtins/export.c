@@ -3,17 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:22:30 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/06 19:55:33 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 04:50:52 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-static void	print_export_format(t_env *env)
+static void	print_export_format(t_shell *shell)
 {
+	t_env	*env;
+
+	env = shell->env;
 	while (env)
 	{
 		if (env->value)
@@ -22,6 +25,7 @@ static void	print_export_format(t_env *env)
 			printf("declare -x %s\n", env->key);
 		env = env->next;
 	}
+	shell->exit_status = EXIT_SUCCESS;
 }
 
 int	is_valid_identifier(char *str)
@@ -63,19 +67,23 @@ static void	handle_assignment(char *key, char *value, t_env **env)
 		ft_lstadd_back_env(env, new_node);
 }
 
-static void	export_variable(char *arg, t_env **env)
+static void	export_variable(char *arg, t_shell *shell)
 {
 	char	*equal_sign_string;
 	char	*key;
 	char	*value;
 	
 	equal_sign_string = ft_strchr(arg, '=');
+	shell->exit_status = EXIT_FAILURE;
 	if (equal_sign_string)
 	{
 		key = ft_substr(arg, 0, equal_sign_string - arg);
 		value = ft_strdup(equal_sign_string + 1);
 		if (is_valid_identifier(key))
-			handle_assignment(key, value, env);
+		{
+			shell->exit_status = EXIT_SUCCESS;
+			handle_assignment(key, value, &shell->env);
+		}
 		else
 			printf("Shellnobyl: export: `%s': not a valid identifier\n", arg);
 		free(key);
@@ -86,21 +94,25 @@ static void	export_variable(char *arg, t_env **env)
 			printf ("Shellnobyl: export: `%s': not a valid identifier", arg);
 }
 
-void	ft_export(char **args, t_env **env)
+void	ft_export(t_shell *shell)
 {
-	int	i;
-	
-	if (!args || !env || !*env)
+	int		i;
+	char	**args;
+
+	if (!shell || !shell->env)
 		return;
+	args = shell->cmd->args;
+	if (!args)
+		return ;
 	if (!args[1])
 	{
-		print_export_format(*env);
+		print_export_format(shell);
 		return;
 	}
 	i = 1;
 	while (args[i])
 	{
-		export_variable(args[i], env);
+		export_variable(args[i], shell);
 		i++;
 	}
 }

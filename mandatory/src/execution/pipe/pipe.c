@@ -39,7 +39,7 @@ static int	has_output_redir(t_cmd *cmd)
 //     exit(0);
 // }
 
-static void	child_process(t_cmd *cmd, int prev_fd, int pipe_fd[2], t_env **env)
+static void	child_process(t_shell *shell, t_cmd *cmd, int prev_fd, int pipe_fd[2])
 {
     if (prev_fd != -1)
     {
@@ -58,30 +58,29 @@ static void	child_process(t_cmd *cmd, int prev_fd, int pipe_fd[2], t_env **env)
         close(pipe_fd[1]);
     }
     if (setup_redirection(cmd) == -1)
-        exit(1);
+        exit(EXIT_FAILURE);
     if (is_builtin(cmd->args[0]))
-        exec_builtin(env, cmd);
+        exec_builtin(shell);
     else
-        exec_external_child(env, cmd);
-    exit(0);
+        exec_external_child(&shell->env, cmd);
+    exit(EXIT_SUCCESS);
 }
 
-void    execute_pipeline(t_env **env, t_cmd *cmd_list)
+void    execute_pipeline(t_shell *shell, int prev_fd)
 {
     int        pipe_fd[2];
-    int        prev_fd;
     pid_t    pid;
     t_cmd    *cmd;
+	int		status;
 
-    prev_fd = -1;
-    cmd = cmd_list;
+    cmd = shell->cmd;
     while (cmd)
     {
         if (cmd->next)
             pipe(pipe_fd);
         pid = fork();
         if (pid == 0)
-            child_process(cmd, prev_fd, pipe_fd, env);
+            child_process(shell, cmd, prev_fd, pipe_fd);
         if (prev_fd != -1)
             close(prev_fd);
         if (cmd->next)
@@ -91,6 +90,6 @@ void    execute_pipeline(t_env **env, t_cmd *cmd_list)
         }
         cmd = cmd->next;
     }
-    while (wait(NULL) > 0)
-        ;
+    while (wait(&status) > 0)
+    ;
 }

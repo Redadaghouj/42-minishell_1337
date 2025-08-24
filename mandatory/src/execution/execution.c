@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/22 16:27:19 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 06:06:06 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <stdlib.h>
 
 static char **env_to_array(t_env *env)
 {
@@ -40,33 +41,44 @@ static char **env_to_array(t_env *env)
 	return (envp);
 }
 
-void	exec_external(t_env **env, t_cmd *cmd)
+void	exec_external(t_shell *shell, t_cmd *cmd)
 {
 	pid_t	pid;
 	char	**envp;
 	char	*cmd_path;
+	int		status;
 
-	cmd_path = find_command_path(cmd->args[0], *env);
+	cmd_path = find_command_path(cmd->args[0], shell->env);
 	if (!cmd_path)
 	{
         if (ft_strchr(cmd->args[0], '/') && access(cmd->args[0], F_OK) == 0)
-            printf("%s: Permission denied\n", cmd->args[0]);
+		{
+			shell->exit_status = EXIT_PERMISSION;
+            printf("shellnobyl: %s: Permission denied\n", cmd->args[0]);
+		}
         else
-            printf("%s: command not found\n", cmd->args[0]);
+		{
+			shell->exit_status = EXIT_CMD_NOT_FOUND;
+            printf("shellnobyl: %s: command not found\n", cmd->args[0]);
+		}
         return ;
 	}
-	envp = env_to_array(*env);
+	envp = env_to_array(shell->env);
 	pid = fork();
 	if (pid == 0)
 	{
 		if (setup_redirection(cmd) == -1)
-			exit(1);
+			exit(EXIT_AMBIGUOUS_REDIR);
 		execve(cmd_path, cmd->args, envp);
 		perror("execve failed");
-		exit(127);
+		exit(EXIT_CMD_NOT_FOUND);
 	}
 	else if (pid > 0)
-		waitpid (pid, NULL, 0);
+	{
+		waitpid (pid, &status, 0);
+		if (WIFEXITED(status))
+			shell->exit_status = WEXITSTATUS(status);
+	}
 	free (cmd_path);
 	free_array(envp);
 }
@@ -115,47 +127,51 @@ void	restore_stdio(int save_stdout, int save_stdin)
 	close(save_stdout);
 }
 
-void	exec_builtin(t_env **env, t_cmd *cmd)
+void	exec_builtin(t_shell *shell)
 {
-	int	save_stdout;
-	int	save_stdin;
+	char	**args;
+	int		save_stdout;
+	int		save_stdin;
 
-	if (!setup_with_backup(cmd, &save_stdout, &save_stdin))
+	args = shell->cmd->args;
+	if (!setup_with_backup(shell->cmd, &save_stdout, &save_stdin))
 		return ;
-	if (!ft_strcmp(cmd->args[0], "echo"))
-		ft_echo(cmd->args);
-	else if (!ft_strcmp(cmd->args[0], "cd"))
-		ft_cd(cmd->args, env);
-	else if (!ft_strcmp(cmd->args[0], "pwd"))
-		ft_pwd();
-	else if (!ft_strcmp(cmd->args[0], "env"))
-		ft_env(env);
-	else if (!ft_strcmp(cmd->args[0], "export"))
-		ft_export(cmd->args, env);
-	else if (!ft_strcmp(cmd->args[0], "unset"))
-		ft_unset(cmd->args, env);
-	else if (!ft_strcmp(cmd->args[0], "exit"))
-		ft_exit(cmd->args);
+	if (!ft_strcmp(args[0], "echo"))
+		ft_echo(shell);
+	else if (!ft_strcmp(args[0], "cd"))
+		ft_cd(shell);
+	else if (!ft_strcmp(args[0], "pwd"))
+		ft_pwd(shell);
+	else if (!ft_strcmp(args[0], "env"))
+		ft_env(shell);
+	else if (!ft_strcmp(args[0], "export"))
+		ft_export(shell);
+	else if (!ft_strcmp(args[0], "unset"))
+		ft_unset(shell);
+	else if (!ft_strcmp(args[0], "exit"))
+		ft_exit(args);
 	restore_stdio(save_stdout, save_stdin);
 }
 
-void	execution(t_env **env, t_cmd *cmd)
+void	execution(t_shell *shell)
 {
 	t_cmd   *tmp;
+	int		prev_fd;
 
-	if (!cmd || !env || !*env)
+	if (!shell || !shell->cmd || !shell->env)
 		return;
-	tmp = cmd;
+	tmp = shell->cmd;
+	prev_fd = -1;
 	if (tmp->next)
 	{
-		execute_pipeline(env, tmp);
+		execute_pipeline(shell, prev_fd);
 		return;
 	}
 	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
 		return;
 	if (is_builtin(tmp->args[0]))
-		exec_builtin(env, tmp);
+		exec_builtin(shell);
 	else
-		exec_external(env, tmp);
+		exec_external(shell, tmp);
 }
 

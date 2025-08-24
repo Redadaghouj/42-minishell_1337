@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:39:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/21 12:37:34 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 03:40:52 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+#include <stdlib.h>
 
 void	should_heredoc_expand(t_redir *node)
 {
@@ -21,7 +22,7 @@ void	should_heredoc_expand(t_redir *node)
 		node->should_expand = false;
 }
 
-char	*expand_heredoc(char *line, t_env *env_lst)
+char	*expand_heredoc(char *line, t_shell *shell)
 {
 	t_expander	exp;
 	int			i;
@@ -31,7 +32,7 @@ char	*expand_heredoc(char *line, t_env *env_lst)
 	while (line[i])
 	{
 		if (line[i] == '$' && (ft_isalpha(line[i + 1]) || line[i + 1] == '_'))
-			expander_magic(&exp, line, &i, env_lst);
+			expander_magic(&exp, line, &i, shell);
 		else
 			exp.output = append_char(exp.output, line[i]);
 		i++;
@@ -40,7 +41,7 @@ char	*expand_heredoc(char *line, t_env *env_lst)
 	return (exp.output);
 }
 
-void	child_process(t_redir *node, t_env *env)
+void	child_process(t_redir *node, t_shell *shell)
 {
 	char	*line;
 	int		fd;
@@ -60,7 +61,7 @@ void	child_process(t_redir *node, t_env *env)
 			break ;
 		}
 		if (node->should_expand)
-			line = expand_heredoc(line, env);
+			line = expand_heredoc(line, shell);
 		ft_putstr_fd(line, fd);
 		free(line);
 	}
@@ -68,7 +69,7 @@ void	child_process(t_redir *node, t_env *env)
 	exit(EXIT_SUCCESS);
 }
 
-int	run_heredoc(t_redir *node, t_env *env)
+int	run_heredoc(t_redir *node, t_shell *shell)
 {
 	int		status;
 	pid_t	pid;
@@ -78,32 +79,36 @@ int	run_heredoc(t_redir *node, t_env *env)
 	if (pid == -1)
 		return (EXIT_FAILURE);
 	else if (pid == 0)
-		child_process(node, env);
+		child_process(node, shell);
 	else
 	{
 		waitpid(pid, &status, 0);
 		setup_main_signals();
-		if (WEXITSTATUS(status) == SIGINT_KILLED)
+		if (WEXITSTATUS(status) == EXIT_SIGINT)
 		{
+			shell->exit_status = EXIT_SIGINT;
 			unlink(HEREDOC_TMP);
 			return (EXIT_FAILURE);
 		}
 		node->heredoc_fd = open(HEREDOC_TMP, O_RDONLY);
 		unlink(HEREDOC_TMP);
+		shell->exit_status = EXIT_SUCCESS;
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	handle_heredoc(t_cmd *cmd, t_env *env)
+int	handle_heredoc(t_shell *shell)
 {
 	t_redir	*redir;
+	t_cmd	*cmd;
 
+	cmd = shell->cmd;
 	while (cmd)
 	{
 		redir = cmd->redir;
 		while (redir)
 		{
-			if (redir->type == TOKEN_HEREDOC && run_heredoc(redir, env))
+			if (redir->type == TOKEN_HEREDOC && run_heredoc(redir, shell))
 				return (EXIT_FAILURE);
 			redir = redir->next;
 		}
