@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/16 15:10:34 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/24 17:00:33 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	setup_main_signals(void)
 	sigaction(SIGQUIT, &sa, NULL);
 }
 
-int	should_terminate_prompt(char *input)
+int	is_eof_input(t_shell *shell, char *input)
 {
-	if (!input || !ft_strcmp("exit", input))
+	if (!input)
 	{
-		if (input)
-			free(input);
+		shell->exit_status = EXIT_SUCCESS;
 		printf("exit\n");
+		free(input);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

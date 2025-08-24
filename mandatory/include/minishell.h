@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/24 03:45:46 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:58:48 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,12 @@ typedef struct s_shell
 	int		exit_status;
 }	t_shell;
 
+/* MINISHELL */
+void	process_line(char *input, t_shell *shell);
+
 /* UTILS */
 int		ft_strcmp(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
@@ -65,7 +69,7 @@ char	*get_next_line(int fd);
 char	*rb_strjoin(char *s1, char *s2);
 
 /* MINISHELL UTILS */
-int		should_terminate_prompt(char *input);
+int		is_eof_input(t_shell *shell, char *input);
 void	handle_sigint(int sig);
 void	setup_main_signals(void);
 t_env	*init_env(void);

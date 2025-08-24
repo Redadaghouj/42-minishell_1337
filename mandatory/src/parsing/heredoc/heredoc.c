@@ -6,12 +6,11 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:39:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/24 03:40:52 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:02:24 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-#include <stdlib.h>
 
 void	should_heredoc_expand(t_redir *node)
 {
@@ -53,7 +52,8 @@ void	child_process(t_redir *node, t_shell *shell)
 	{
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
-		if (!line || ft_strcmp(line, node->file_delim) == 0)
+		line = ft_strjoin(line, "\n");
+		if (!line || !ft_strcmp(line, node->file_delim))
 		{
 			if (!line)
 				ft_putstr_fd("\n", STDOUT_FILENO);

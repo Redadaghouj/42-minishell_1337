@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:23:35 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 05:30:16 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:44:26 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,12 @@ static void unset_variable(char *arg, t_shell *shell)
 	}
 }
 
-void	ft_unset(t_shell *shell)
+void	ft_unset(t_shell *shell, char **args)
 {
     int 	i;
-	char	**args;
 
-    if (!shell || !shell->env)
+    if (!shell || !shell->env || !args || !args[1])
 		return ;
-	args = shell->cmd->args;
-    if (!args || !args[1])
-        return ;
     i = 1;
     while (args[i])
     {

@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 21:09:56 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 06:07:28 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:42:37 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,22 @@ int		is_n_flag(char *str)
 	return (1);
 }
 
-void	ft_echo(t_shell *shell)
+void	ft_echo(t_shell *shell, char **args)
 {
 	int	i;
 	int	new_linef;
-	char	**arv;
 
 	i = 1;
 	new_linef = 1;
-	arv = shell->cmd->args;
-	while (arv[i] && is_n_flag(arv[i]))
+	while (args[i] && is_n_flag(args[i]))
 	{
 		new_linef = 0;
 		i++;
 	}
-	while (arv[i])
+	while (args[i])
 	{
-		ft_putstr_fd(arv[i], 1);
-		if (arv[i + 1])
+		ft_putstr_fd(args[i], 1);
+		if (args[i + 1])
 			ft_putstr_fd(" ", 1);
 		i++;
 	}

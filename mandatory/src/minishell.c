@@ -6,17 +6,14 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/24 02:43:53 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:58:54 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	g_signals;
-
-void	cleanup_resources(t_token **token, t_cmd **cmd, char *input)
+void	cleanup_resources(t_cmd **cmd, char *input)
 {
-	ft_lstclear_token(token);
 	ft_lstclear_cmd(cmd);
 	free(input);
 }
@@ -29,10 +26,11 @@ void	process_line(char *input, t_shell *shell)
 	shell->cmd = NULL;
 	lexer(input, &token);
 	parser(token, shell);
+	ft_lstclear_token(&token);
 	expansion(shell);
 	handle_heredoc(shell);
 	execution(shell);
-	cleanup_resources(&token, &shell->cmd, input);
+	cleanup_resources(&shell->cmd, input);
 }
 
 void	run_interactive_shell(t_shell *shell)
@@ -43,15 +41,41 @@ void	run_interactive_shell(t_shell *shell)
 	while (true)
 	{
 		input = readline("☢️ shellnobyl$ ");
-		if (should_terminate_prompt(input))
+		if (is_eof_input(shell, input))
 			break ;
 		if (*input)
 		{
 			add_history(input);
+			if (!ft_strncmp("exit", input, 4))
+				printf("exit\n");
 			process_line(input, shell);
 		}
 	}
 }
+
+// void	run_interactive_shell(t_shell *shell)
+// {
+// 	char	*input;
+// 	char	*prompt;
+// 	char	cwd[1024];
+
+// 	setup_main_signals();
+// 	while (true)
+// 	{
+// 		if (getcwd(cwd, sizeof(cwd)))
+// 			prompt = cwd;
+// 		input = readline(prompt);
+// 		if (is_eof_input(shell, input))
+// 			break ;
+// 		if (*input)
+// 		{
+// 			add_history(input);
+// 			if (!ft_strncmp("exit", input, 4))
+// 				printf("exit\n");
+// 			process_line(input, shell);
+// 		}
+// 	}
+// }
 
 void	run_script_shell(t_shell *shell)
 {
@@ -79,5 +103,5 @@ int	main(void)
 	else
 		run_script_shell(&shell);
 	ft_lstclear_env(&shell.env);
-	return (EXIT_SUCCESS);
+	return (shell.exit_status);
 }

@@ -1,4 +1,5 @@
 #include "../../../include/minishell.h"
+#include <stdlib.h>
 
 static int	has_output_redir(t_cmd *cmd)
 {
@@ -60,7 +61,7 @@ static void	child_process(t_shell *shell, t_cmd *cmd, int prev_fd, int pipe_fd[2
     if (setup_redirection(cmd) == -1)
         exit(EXIT_FAILURE);
     if (is_builtin(cmd->args[0]))
-        exec_builtin(shell);
+        exec_builtin(shell, cmd->args);
     else
         exec_external_child(&shell->env, cmd);
     exit(EXIT_SUCCESS);
@@ -68,9 +69,9 @@ static void	child_process(t_shell *shell, t_cmd *cmd, int prev_fd, int pipe_fd[2
 
 void    execute_pipeline(t_shell *shell, int prev_fd)
 {
-    int        pipe_fd[2];
-    pid_t    pid;
-    t_cmd    *cmd;
+    t_cmd	*cmd;
+    pid_t	pid;
+    int		pipe_fd[2];
 	int		status;
 
     cmd = shell->cmd;
@@ -91,5 +92,5 @@ void    execute_pipeline(t_shell *shell, int prev_fd)
         cmd = cmd->next;
     }
     while (wait(&status) > 0)
-    ;
+		shell->exit_status = WEXITSTATUS(status);
 }

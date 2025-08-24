@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/21 13:36:30 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:00:48 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*find_command_path(char *cmd, t_env *env)
 	char	*result;
 
 	if (!cmd)
-	return (NULL);
+		return (NULL);
 	path_env = get_env_value(ft_strdup("PATH"), env);
 	if (ft_strchr(cmd, '/') || path_env == NULL)
 	{

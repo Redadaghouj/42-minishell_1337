@@ -20,6 +20,7 @@ HEREDOC_PATH := ${MANDO}/src/parsing/heredoc
 EXECUTION_PATH := ${MANDO}/src/execution
 
 UTILS := ${UTILS_PATH}/ft_strcmp.c \
+		 ${UTILS_PATH}/ft_strncmp.c \
 		 ${UTILS_PATH}/ft_strdup.c \
 		 ${UTILS_PATH}/ft_strlen.c \
 		 ${UTILS_PATH}/ft_substr.c \

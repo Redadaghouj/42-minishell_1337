@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:22:30 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 04:50:52 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:43:42 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,12 @@ static void	export_variable(char *arg, t_shell *shell)
 			printf ("Shellnobyl: export: `%s': not a valid identifier", arg);
 }
 
-void	ft_export(t_shell *shell)
+void	ft_export(t_shell *shell, char **args)
 {
 	int		i;
-	char	**args;
 
-	if (!shell || !shell->env)
+	if (!shell || !shell->env || !args)
 		return;
-	args = shell->cmd->args;
-	if (!args)
-		return ;
 	if (!args[1])
 	{
 		print_export_format(shell);

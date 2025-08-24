@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/24 06:06:17 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 20:44:59 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,21 @@
 
 typedef struct s_shell t_shell;
 
+# define EXIT_STATUS_MASK 256
 # define ERR_AMBIGUOUS_REDIRECT \
 		"Shellnobyl: ambiguous redirect\n"
 
 void	execution(t_shell *shell);
-void	exec_builtin(t_shell *shell);
+void	exec_builtin(t_shell *shell, char **args);
 void	exec_external_child(t_env **env, t_cmd *cmd);
 int		setup_redirection(t_cmd *cmd);
 void	execute_pipeline(t_shell *shell, int prev_fd);
 //builtins :
-void	ft_export(t_shell *shell);
-void	ft_unset(t_shell *shell);
-void	ft_cd(t_shell *shell);
-void	ft_exit(char **args);
-void	ft_echo(t_shell *shell);
+void	ft_export(t_shell *shell, char **args);
+void	ft_unset(t_shell *shell, char **args);
+void	ft_cd(t_shell *shell, char **args);
+void	ft_exit(t_shell *shell, char **args);
+void	ft_echo(t_shell *shell, char **args);
 void	ft_env(t_shell *shell);
 void	ft_pwd(t_shell *shell);
 

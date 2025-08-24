@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/24 06:06:06 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 21:11:20 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,29 +127,27 @@ void	restore_stdio(int save_stdout, int save_stdin)
 	close(save_stdout);
 }
 
-void	exec_builtin(t_shell *shell)
+void	exec_builtin(t_shell *shell, char **args)
 {
-	char	**args;
 	int		save_stdout;
 	int		save_stdin;
 
-	args = shell->cmd->args;
 	if (!setup_with_backup(shell->cmd, &save_stdout, &save_stdin))
 		return ;
 	if (!ft_strcmp(args[0], "echo"))
-		ft_echo(shell);
+		ft_echo(shell, args);
 	else if (!ft_strcmp(args[0], "cd"))
-		ft_cd(shell);
+		ft_cd(shell, args);
 	else if (!ft_strcmp(args[0], "pwd"))
 		ft_pwd(shell);
 	else if (!ft_strcmp(args[0], "env"))
 		ft_env(shell);
 	else if (!ft_strcmp(args[0], "export"))
-		ft_export(shell);
+		ft_export(shell, args);
 	else if (!ft_strcmp(args[0], "unset"))
-		ft_unset(shell);
+		ft_unset(shell, args);
 	else if (!ft_strcmp(args[0], "exit"))
-		ft_exit(args);
+		ft_exit(shell, args);
 	restore_stdio(save_stdout, save_stdin);
 }
 
@@ -170,7 +168,7 @@ void	execution(t_shell *shell)
 	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])
 		return;
 	if (is_builtin(tmp->args[0]))
-		exec_builtin(shell);
+		exec_builtin(shell, tmp->args);
 	else
 		exec_external(shell, tmp);
 }

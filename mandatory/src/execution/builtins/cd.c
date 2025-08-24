@@ -1,11 +1,9 @@
 #include "../../../include/minishell.h"
 
-void    ft_cd(t_shell *shell)
+void    ft_cd(t_shell *shell, char **args)
 {
     char    *home;
-	char	**args;
 
-	args = shell->cmd->args;
 	shell->exit_status = EXIT_SUCCESS;
     if (!args[1])
     {
