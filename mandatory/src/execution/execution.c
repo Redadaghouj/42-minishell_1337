@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/25 00:04:47 by rben-ais         ###   ########.fr       */
+/*   Created: 2025/08/25 15:28:46 by mdaghouj          #+#    #+#             */
+/*   Updated: 2025/08/25 16:35:26 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <stdlib.h>
 
 static void	help_external(t_shell *shell,
 	t_cmd *cmd, char *cmd_path, char **envp)
@@ -19,9 +18,11 @@ static void	help_external(t_shell *shell,
 	int		status;
 	pid_t	pid;
 
+	status = 0;
 	pid = fork();
 	if (pid == 0)
 	{
+		reset_and_catch_sig(shell, status, true);
 		if (setup_redirection(cmd) == -1)
 			exit(EXIT_AMBIGUOUS_REDIR);
 		execve(cmd_path, cmd->args, envp);
@@ -30,9 +31,8 @@ static void	help_external(t_shell *shell,
 	}
 	else if (pid > 0)
 	{
-		waitpid (pid, &status, 0);
-		if (WIFEXITED(status))
-			shell->exit_status = WEXITSTATUS(status);
+		waitpid(pid, &status, 0);
+		reset_and_catch_sig(shell, status, false);
 	}
 }
 
@@ -71,11 +71,12 @@ void	exec_external_child(t_env **env, t_cmd *cmd)
 	if (!cmd_path)
 	{
 		if (ft_strchr(cmd->args[0], '/') && access(cmd->args[0], F_OK) == 0)
-			ft_putstr_fd("Permission denied\n", STDERR_FILENO);
+			ft_putstr_fd("shellnobyl: Permission denied\n", STDERR_FILENO);
 		else
 		{
+			ft_putstr_fd("shellnobyl: ", STDERR_FILENO);
 			ft_putstr_fd(cmd->args[0], STDERR_FILENO);
-			ft_putstr_fd(": command not found\n", STDERR_FILENO);
+			ft_putstr_fd(": command not found...\n", STDERR_FILENO);
 		}
 		exit(127);
 	}
@@ -117,7 +118,7 @@ void	execution(t_shell *shell)
 	t_cmd	*tmp;
 	int		prev_fd;
 
-	if (!shell || !shell->cmd || !shell->env)
+	if (!shell || !shell->cmd)
 		return ;
 	tmp = shell->cmd;
 	prev_fd = -1;

@@ -3,15 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 23:17:17 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/25 00:02:27 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/25 15:59:16 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-#include <stdlib.h>
+
+void	reset_and_catch_sig(t_shell *shell, int status, bool toggle)
+{
+	if (toggle)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+	else
+	{
+		if (WIFEXITED(status))
+			shell->exit_status = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			shell->exit_status = WTERMSIG(status) + EXIT_SIGNAL;
+	}
+}
 
 static int	has_output_redir(t_cmd *cmd)
 {
@@ -32,6 +47,7 @@ static int	has_output_redir(t_cmd *cmd)
 static void	child_process(t_shell *shell, t_cmd *cmd,
 	int prev_fd, int pipe_fd[2])
 {
+	reset_and_catch_sig(shell, 0, true);
 	if (prev_fd != -1)
 	{
 		dup2(prev_fd, STDIN_FILENO);
@@ -82,7 +98,7 @@ void	execute_pipeline(t_shell *shell, int prev_fd)
 		cmd = cmd->next;
 	}
 	while (wait(&status) > 0)
-		shell->exit_status = WEXITSTATUS(status);
+		reset_and_catch_sig(shell, status, false);
 }
 
 bool	setup_with_backup(t_cmd *cmd, int *save_stdout, int *save_stdin)

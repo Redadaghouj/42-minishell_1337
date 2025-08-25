@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/24 17:00:33 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:50:18 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,13 @@ t_env	*init_env(void)
 	env = NULL;
 	env = parse_env();
 	if (!env)
-		return (NULL);
+	{
+		env = (t_env *)malloc(sizeof(t_env));
+		if (!env)
+			return (NULL);
+		env->key = ft_strdup(ENV_PATH_KEY);
+		env->value = ft_strdup(DEFAULT_PATH);
+		env->next = NULL;
+	}
 	return (env);
 }

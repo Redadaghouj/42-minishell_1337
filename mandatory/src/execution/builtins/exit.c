@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:14:16 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 23:15:43 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:33:03 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_exit(t_shell *shell, char **args)
 	else if (arg_count > 2)
 	{
 		printf("shellnobyl: exit: too many arguments\n");
-		shell->exit_status = EXIT_AMBIGUOUS_REDIR;
+		shell->exit_status = EXIT_FAILURE;
 		exit(shell->exit_status);
 	}
 	else

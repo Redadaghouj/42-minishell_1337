@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:39:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/24 22:02:24 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/25 15:17:24 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,9 @@ int	run_heredoc(t_redir *node, t_shell *shell)
 	{
 		waitpid(pid, &status, 0);
 		setup_main_signals();
-		if (WEXITSTATUS(status) == EXIT_SIGINT)
+		if (WEXITSTATUS(status) >= EXIT_SIGNAL)
 		{
-			shell->exit_status = EXIT_SIGINT;
+			shell->exit_status = WEXITSTATUS(status);
 			unlink(HEREDOC_TMP);
 			return (EXIT_FAILURE);
 		}

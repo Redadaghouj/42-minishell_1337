@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 02:09:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/24 03:38:43 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/25 15:15:37 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 void	handle_heredoc_sigint(int signum)
 {
-	(void)signum;
 	ft_putstr_fd("\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();
-	exit(EXIT_SIGINT);
+	exit(EXIT_SIGNAL + signum);
 }
 
 void	setup_heredoc_signals(void)

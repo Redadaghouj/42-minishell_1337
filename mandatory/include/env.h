@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:03:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/06 11:57:12 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:49:41 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
+
+# define ENV_PATH_KEY "PATH"
+# define DEFAULT_PATH "/bin:/usr/bin"
 
 typedef struct s_env
 {

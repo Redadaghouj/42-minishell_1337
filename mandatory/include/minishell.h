@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/24 21:58:48 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/25 15:56:12 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define EXIT_SYNTAX 2
 # define EXIT_PERMISSION 126
 # define EXIT_CMD_NOT_FOUND 127
-# define EXIT_SIGINT 130
+# define EXIT_SIGNAL 128
 
 extern char	**environ;
 
@@ -73,7 +73,5 @@ int		is_eof_input(t_shell *shell, char *input);
 void	handle_sigint(int sig);
 void	setup_main_signals(void);
 t_env	*init_env(void);
-
-void	print_cmd_list(t_cmd *cmd); // CHECK:
 
 #endif
