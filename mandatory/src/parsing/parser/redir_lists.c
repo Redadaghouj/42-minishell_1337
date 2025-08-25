@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_lists.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: redadgh <redadgh@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:22:31 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/07/14 13:33:40 by redadgh          ###   ########.fr       */
+/*   Updated: 2025/08/25 00:03:28 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,47 @@ void	ft_lstadd_back_redir(t_redir **lst, t_redir *node)
 		last = ft_lstlast_redir(*lst);
 		last->next = node;
 	}
+}
+
+void	free_array(char **array)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	i = 0;
+	while (array[i])
+	{
+		free(array[i]);
+		i++;
+	}
+	free(array);
+}
+
+char	**env_to_array(t_env *env)
+{
+	char	**envp;
+	char	*temp;
+	t_env	*tmp;
+	int		count;
+	int		i;
+
+	count = count_and_allocate(env, &envp);
+	if (count == -1)
+		return (NULL);
+	i = 0;
+	tmp = env;
+	while (tmp && i < count)
+	{
+		if (tmp->value)
+		{
+			temp = rb_strjoin(tmp->key, "=");
+			envp[i] = rb_strjoin(temp, tmp->value);
+			free(temp);
+			i++;
+		}
+		tmp = tmp->next;
+	}
+	envp[i] = NULL;
+	return (envp);
 }

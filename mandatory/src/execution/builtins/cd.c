@@ -1,27 +1,39 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/24 23:03:45 by rben-ais          #+#    #+#             */
+/*   Updated: 2025/08/24 23:04:01 by rben-ais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
-void    ft_cd(t_shell *shell, char **args)
+void	ft_cd(t_shell *shell, char **args)
 {
-    char    *home;
+	char	*home;
 
 	shell->exit_status = EXIT_SUCCESS;
-    if (!args[1])
-    {
-        home = get_env_value(ft_strdup("HOME"), shell->env);
-        if (!home || chdir(home))
+	if (!args[1])
+	{
+		home = get_env_value(ft_strdup("HOME"), shell->env);
+		if (!home || chdir(home))
 		{
 			shell->exit_status = EXIT_FAILURE;
-            perror("Shellnobyl: cd");
+			perror("Shellnobyl: cd");
 		}
-    }
-    else if (args[2])
+	}
+	else if (args[2])
 	{
 		shell->exit_status = EXIT_FAILURE;
-        printf("Shellnobyl: cd: too many arguments\n");
+		printf("Shellnobyl: cd: too many arguments\n");
 	}
-    else if (chdir(args[1]))
-    {
+	else if (chdir(args[1]))
+	{
 		shell->exit_status = EXIT_FAILURE;
-        printf("Shellnobyl: cd: %s: No such file or directory\n", args[1]);
-    }
+		printf("Shellnobyl: cd: %s: No such file or directory\n", args[1]);
+	}
 }

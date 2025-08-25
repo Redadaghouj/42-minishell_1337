@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:14:16 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 21:07:09 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:15:43 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,28 @@
 
 int	is_number(char *str)
 {
-    int	i;
+	int	i;
 
-    if (!str || !*str)
-        return (0);
-    i = 0;
-    if (str[i] == '-' || str[i] == '+')
-        i++;
-    if (!str[i])  // Only sign character
-        return (0);
-    while (str[i])
-    {
-        if (!ft_isdigit(str[i]))
-            return (0);
-        i++;
-    }
-    return (1);
+	if (!str || !*str)
+		return (0);
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static void	ft_norminette_help(t_shell *shell, char **args)
+{
+	shell->exit_status = ft_atoi(args[1]) % EXIT_STATUS_MASK;
+	exit(shell->exit_status);
 }
 
 void	ft_exit(t_shell *shell, char **args)
@@ -37,7 +43,7 @@ void	ft_exit(t_shell *shell, char **args)
 	int		arg_count;
 
 	arg_count = 0;
-	while(args[arg_count])
+	while (args[arg_count])
 		arg_count++;
 	if (arg_count == 1)
 	{
@@ -57,8 +63,5 @@ void	ft_exit(t_shell *shell, char **args)
 		exit(shell->exit_status);
 	}
 	else
-	{
-		shell->exit_status = ft_atoi(args[1]) % EXIT_STATUS_MASK;
-		exit(shell->exit_status);
-	}
+		ft_norminette_help(shell, args);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:22:30 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 20:43:42 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:06:22 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void	print_export_format(t_shell *shell)
 
 int	is_valid_identifier(char *str)
 {
-	int i;
-	
+	int	i;
+
 	if (!str || !*str)
 		return (0);
 	if (!ft_isalpha(str[0]) && str[0] != '_')
@@ -72,7 +72,7 @@ static void	export_variable(char *arg, t_shell *shell)
 	char	*equal_sign_string;
 	char	*key;
 	char	*value;
-	
+
 	equal_sign_string = ft_strchr(arg, '=');
 	shell->exit_status = EXIT_FAILURE;
 	if (equal_sign_string)
@@ -99,11 +99,11 @@ void	ft_export(t_shell *shell, char **args)
 	int		i;
 
 	if (!shell || !shell->env || !args)
-		return;
+		return ;
 	if (!args[1])
 	{
 		print_export_format(shell);
-		return;
+		return ;
 	}
 	i = 1;
 	while (args[i])

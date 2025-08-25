@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:46:12 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/24 02:43:51 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:30:17 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "lexer.h"
 
-typedef struct s_shell t_shell;
+typedef struct s_shell	t_shell;
 
 # define SQUOTE '\''
 # define DQUOTE '"'

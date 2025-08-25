@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:34:14 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/24 03:11:55 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:32:26 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	expansion(t_shell *shell)
 		while (ptr->args[i])
 		{
 			exp_value = expand_var(ptr->args[i], shell);
-			if (should_split(exp_value, false, false, false))	
+			if (should_split(exp_value, false, false, false))
 				ptr->args = append_args(ptr->args, exp_value, &i, 0);
 			else
 			{

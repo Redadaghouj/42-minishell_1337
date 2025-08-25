@@ -3,78 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/04 15:22:31 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/24 02:43:42 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:36:18 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-
-void	print_args(char **args)
-{
-	int i;
-
-	i = 0;
-	while (args && args[i])
-	{
-		printf("args[%d]: %s\n", i, args[i]);
-		i++;
-	}
-	printf("args[%d]: NULL\n", i);
-}
-
-char	*return_type(unsigned int type)
-{
-	if (type == TOKEN_HEREDOC)
-		return ("<<");
-	else if (type == TOKEN_APPEND_OUT)
-		return(">>");
-	else if (type == TOKEN_REDIR_IN)
-		return ("<");
-	else if (type == TOKEN_REDIR_OUT)
-		return (">");
-	else
-		return ("NON");
-}
-
-void	print_redirs(t_redir *redir)
-{
-	int i;
-
-	i = 0;
-	while (redir)
-	{
-		printf("  redir[%d]: file='%s', type='%s'\n",
-				i, redir->file_delim, return_type(redir->type));
-		redir = redir->next;
-		i++;
-	}
-	if (i == 0)
-		printf("  no redirs\n");
-}
-
-void	print_cmd_list(t_cmd *cmd)
-{
-	int cmd_i;
-
-	cmd_i = 0;
-	while (cmd)
-	{
-		printf("cmd[%d]:\n", cmd_i);
-		if (cmd->args)
-		{
-			for (int i = 0; cmd->args[i]; i++)
-				printf("  args[%d]: %s\n", i, cmd->args[i]);
-		}
-		else
-			printf("  no args\n");
-		print_redirs(cmd->redir);
-		cmd = cmd->next;
-		cmd_i++;
-	}
-}
 
 void	count_cmd_and_redir(t_token *list, int *redir_nbr, int *i)
 {

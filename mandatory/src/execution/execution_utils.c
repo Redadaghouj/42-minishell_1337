@@ -3,71 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   execution_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:35:40 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/24 20:00:48 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:43:38 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	free_array(char **array)
-{
-	int	i;
-
-	if (!array)
-		return ;
-	i = 0;
-	while (array[i])
-	{
-		free(array[i]);
-		i++;
-	}
-	free(array);
-}
-
 int	is_builtin(char *cmd)
 {
 	if (!cmd)
-		return(0);
+		return (0);
 	if (!ft_strcmp(cmd, "echo")
-	||	!ft_strcmp(cmd, "cd")
-	||	!ft_strcmp(cmd, "pwd")
-	||	!ft_strcmp(cmd, "export")
-	||	!ft_strcmp(cmd, "unset")
-	||	!ft_strcmp(cmd, "env")
-	||	!ft_strcmp(cmd, "exit"))
-		return(1);
+		|| !ft_strcmp(cmd, "cd")
+		|| !ft_strcmp(cmd, "pwd")
+		|| !ft_strcmp(cmd, "export")
+		|| !ft_strcmp(cmd, "unset")
+		|| !ft_strcmp(cmd, "env")
+		|| !ft_strcmp(cmd, "exit"))
+		return (1);
 	else
 		return (0);
 }
 
-static char *search_in_paths(char **paths, char *cmd)
+static char	*join_and_check(char *path, char *cmd)
+{
+	char	*tmp;
+	char	*full_path;
+
+	tmp = rb_strjoin(path, "/");
+	if (!tmp)
+		return (NULL);
+	full_path = rb_strjoin(tmp, cmd);
+	free(tmp);
+	if (!full_path)
+		return (NULL);
+	if (access(full_path, F_OK | X_OK) == 0)
+		return (full_path);
+	free(full_path);
+	return (NULL);
+}
+
+static char	*search_in_paths(char **paths, char *cmd)
 {
 	char	*full_path;
-	char	*tmp;
 	int		i;
 
 	i = 0;
 	while (paths[i])
 	{
-		tmp = rb_strjoin(paths[i], "/");
-		if (!tmp)
-		{
-			i++;
-			continue;
-		}
-		full_path = rb_strjoin(tmp, cmd);
-		free(tmp);
-		if (!full_path)
-		{
-			i++;
-			continue;
-		}
-		if (access(full_path, F_OK | X_OK) == 0)
+		full_path = join_and_check(paths[i], cmd);
+		if (full_path)
 			return (full_path);
-		free(full_path);
 		i++;
 	}
 	return (NULL);
@@ -88,7 +77,7 @@ char	*find_command_path(char *cmd, t_env *env)
 		{
 			if (access(cmd, X_OK) == 0)
 				return (ft_strdup(cmd));
-			return(NULL); // bdlha l permetion denied 
+			return (NULL);
 		}
 		return (NULL);
 	}
@@ -96,7 +85,7 @@ char	*find_command_path(char *cmd, t_env *env)
 		return (NULL);
 	paths = ft_split(path_env, ':');
 	if (!paths)
-		return(NULL);
+		return (NULL);
 	result = search_in_paths(paths, cmd);
 	free_array(paths);
 	return (result);
@@ -106,7 +95,7 @@ int	count_and_allocate(t_env *env, char ***envp)
 {
 	t_env	*tmp;
 	int		count;
-	
+
 	count = 0;
 	tmp = env;
 	while (tmp)

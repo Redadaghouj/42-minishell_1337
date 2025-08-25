@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 21:09:56 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 20:42:37 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 23:05:47 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
 
-int		is_n_flag(char *str)
+int	is_n_flag(char *str)
 {
 	int	i;
-	
+
 	if (str[0] != '-' || str[1] != 'n')
 		return (0);
 	i = 2;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:00:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/24 03:03:26 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/24 22:31:00 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "parser.h"
 # include "env.h"
 
-typedef struct s_shell t_shell;
+typedef struct s_shell	t_shell;
 
 typedef struct s_expander
 {

@@ -5,6 +5,7 @@
         "readline.h": "c",
         "execution.h": "c",
         "stdbool.h": "c",
-        "minishell.h": "c"
+        "minishell.h": "c",
+        "stdlib.h": "c"
     }
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/24 22:56:58 by rben-ais          #+#    #+#             */
+/*   Updated: 2025/08/24 22:57:48 by rben-ais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/minishell.h"
 
 static int	handle_input_redir(t_redir *redir)
@@ -6,7 +18,7 @@ static int	handle_input_redir(t_redir *redir)
 
 	if (redir->type == TOKEN_HEREDOC)
 	{
-		if(dup2(redir->heredoc_fd, STDIN_FILENO) == -1)
+		if (dup2(redir->heredoc_fd, STDIN_FILENO) == -1)
 			return (perror("dup2"), -1);
 		close(redir->heredoc_fd);
 	}
@@ -55,26 +67,26 @@ static int	handle_output_redir(t_redir *redir)
 
 int	setup_redirection(t_cmd *cmd)
 {
-    t_redir	*cur;
+	t_redir	*cur;
 
 	if (!cmd || !cmd->redir)
-        return (0);
-    cur = cmd->redir;
-    while (cur)
-    {
+		return (0);
+	cur = cmd->redir;
+	while (cur)
+	{
 		if (is_redir_ambiguous(cur))
 			return (-1);
-        if (cur->type == TOKEN_REDIR_IN || cur->type == TOKEN_HEREDOC)
-        {
-            if (handle_input_redir(cur) == -1)
-                return (-1);
-        }
-        else if (cur->type == TOKEN_REDIR_OUT || cur->type == TOKEN_APPEND_OUT)
-        {
-            if (handle_output_redir(cur) == -1)
-                return (-1);
-        }
-        cur = cur->next;
-    }
-    return (0);
+		if (cur->type == TOKEN_REDIR_IN || cur->type == TOKEN_HEREDOC)
+		{
+			if (handle_input_redir(cur) == -1)
+				return (-1);
+		}
+		else if (cur->type == TOKEN_REDIR_OUT || cur->type == TOKEN_APPEND_OUT)
+		{
+			if (handle_output_redir(cur) == -1)
+				return (-1);
+		}
+		cur = cur->next;
+	}
+	return (0);
 }
