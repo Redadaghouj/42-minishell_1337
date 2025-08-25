@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 23:17:17 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/25 15:59:16 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/25 23:18:51 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,9 @@ static void	child_process(t_shell *shell, t_cmd *cmd,
 	exit(EXIT_SUCCESS);
 }
 
-void	execute_pipeline(t_shell *shell, int prev_fd)
+void	execute_pipeline(t_shell *shell, int prev_fd, pid_t pid)
 {
 	t_cmd	*cmd;
-	pid_t	pid;
 	int		pipe_fd[2];
 	int		status;
 
@@ -97,8 +96,10 @@ void	execute_pipeline(t_shell *shell, int prev_fd)
 		}
 		cmd = cmd->next;
 	}
-	while (wait(&status) > 0)
-		reset_and_catch_sig(shell, status, false);
+	waitpid(pid, &status, 0);
+	while (wait(NULL) > 0)
+		;
+	reset_and_catch_sig(shell, status, false);
 }
 
 bool	setup_with_backup(t_cmd *cmd, int *save_stdout, int *save_stdin)

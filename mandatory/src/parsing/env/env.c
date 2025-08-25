@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:31:17 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/20 22:10:43 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/25 23:13:42 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,6 @@ t_env	*parse_env(void)
 }
 
 char	*get_env_value(char *var, t_env *env)
-{
-	while (env)
-	{
-		if (ft_strcmp(var, env->key) == 0)
-		{
-			free(var);
-			return (env->value);
-		}
-		env = env->next;
-	}
-	free(var);
-	return (NULL);
-}
-
-char	*rb_get_env_value(char *var, t_env *env)
 {
 	while (env)
 	{

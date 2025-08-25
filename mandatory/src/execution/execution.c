@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:28:46 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/25 18:23:32 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/25 23:11:50 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	execution(t_shell *shell)
 	prev_fd = -1;
 	if (tmp->next)
 	{
-		execute_pipeline(shell, prev_fd);
+		execute_pipeline(shell, prev_fd, -1);
 		return ;
 	}
 	if (!tmp->args || !tmp->args[0] || !tmp->args[0][0])

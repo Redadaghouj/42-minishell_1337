@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/25 16:54:13 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/25 23:14:38 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,6 @@ void	run_interactive_shell(t_shell *shell)
 		}
 	}
 }
-
-// void	run_interactive_shell(t_shell *shell)
-// {
-// 	char	*input;
-// 	char	*prompt;
-// 	char	cwd[1024];
-
-// 	setup_main_signals();
-// 	while (true)
-// 	{
-// 		if (getcwd(cwd, sizeof(cwd)))
-// 			prompt = cwd;
-// 		input = readline(prompt);
-// 		if (is_eof_input(shell, input))
-// 			break ;
-// 		if (*input)
-// 		{
-// 			add_history(input);
-// 			if (!ft_strncmp("exit", input, 4))
-// 				printf("exit\n");
-// 			process_line(input, shell);
-// 		}
-// 	}
-// }
 
 void	run_script_shell(t_shell *shell)
 {

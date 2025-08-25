@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/25 15:56:40 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/25 23:09:40 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	execution(t_shell *shell);
 void	exec_builtin(t_shell *shell, char **args);
 void	exec_external_child(t_env **env, t_cmd *cmd);
 int		setup_redirection(t_cmd *cmd);
-void	execute_pipeline(t_shell *shell, int prev_fd);
+void	execute_pipeline(t_shell *shell, int prev_fd, pid_t pid);
 
 //builtins :
 void	ft_export(t_shell *shell, char **args);
