@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   execution.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 15:28:46 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/25 16:35:26 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/25 18:23:32 by rben-ais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-static void	help_external(t_shell *shell,
-	t_cmd *cmd, char *cmd_path, char **envp)
+static char	**help_external(t_shell *shell,
+	t_cmd *cmd, char *cmd_path)
 {
+	char	**envp;
 	int		status;
 	pid_t	pid;
 
+	envp = env_to_array(shell->env);
 	status = 0;
 	pid = fork();
 	if (pid == 0)
@@ -34,6 +36,7 @@ static void	help_external(t_shell *shell,
 		waitpid(pid, &status, 0);
 		reset_and_catch_sig(shell, status, false);
 	}
+	return (envp);
 }
 
 void	exec_external(t_shell *shell, t_cmd *cmd)
@@ -51,13 +54,16 @@ void	exec_external(t_shell *shell, t_cmd *cmd)
 		}
 		else
 		{
+			if (ft_strchr(cmd->args[0], '/') || !cmd_path)
+				printf("shellnobyl: %s: No such file or directory\n",
+					cmd->args[0]);
+			else
+				printf("shellnobyl: %s: command not found...\n", cmd->args[0]);
 			shell->exit_status = EXIT_CMD_NOT_FOUND;
-			printf("shellnobyl: %s: command not found\n", cmd->args[0]);
 		}
 		return ;
 	}
-	envp = env_to_array(shell->env);
-	help_external(shell, cmd, cmd_path, envp);
+	envp = help_external(shell, cmd, cmd_path);
 	free (cmd_path);
 	free_array(envp);
 }
