@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:39:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/25 15:17:24 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 00:13:59 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ char	*expand_heredoc(char *line, t_shell *shell)
 	return (exp.output);
 }
 
-void	child_process(t_redir *node, t_shell *shell)
+void	child_process(t_redir *node, t_shell *shell, char *line)
 {
-	char	*line;
 	int		fd;
 
 	setup_heredoc_signals();
@@ -52,21 +51,22 @@ void	child_process(t_redir *node, t_shell *shell)
 	{
 		ft_putstr_fd("> ", STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
-		line = ft_strjoin(line, "\n");
-		if (!line || !ft_strcmp(line, node->file_delim))
+		if (!line)
 		{
-			if (!line)
-				ft_putstr_fd("\n", STDOUT_FILENO);
+			ft_putstr_fd("\n", STDOUT_FILENO);
+			break ;
+		}
+		line = ft_strjoin(line, "\n");
+		if (!ft_strcmp(line, node->file_delim))
+		{
 			free(line);
 			break ;
 		}
 		if (node->should_expand)
 			line = expand_heredoc(line, shell);
-		ft_putstr_fd(line, fd);
-		free(line);
+		(ft_putstr_fd(line, fd), free(line));
 	}
-	close(fd);
-	exit(EXIT_SUCCESS);
+	(close(fd), exit(EXIT_SUCCESS));
 }
 
 int	run_heredoc(t_redir *node, t_shell *shell)
@@ -79,19 +79,18 @@ int	run_heredoc(t_redir *node, t_shell *shell)
 	if (pid == -1)
 		return (EXIT_FAILURE);
 	else if (pid == 0)
-		child_process(node, shell);
+		child_process(node, shell, NULL);
 	else
 	{
 		waitpid(pid, &status, 0);
 		setup_main_signals();
-		if (WEXITSTATUS(status) >= EXIT_SIGNAL)
-		{
-			shell->exit_status = WEXITSTATUS(status);
-			unlink(HEREDOC_TMP);
-			return (EXIT_FAILURE);
-		}
 		node->heredoc_fd = open(HEREDOC_TMP, O_RDONLY);
 		unlink(HEREDOC_TMP);
+		if (WEXITSTATUS(status) == SIGINT_KILLED)
+		{
+			shell->exit_status = WEXITSTATUS(status);
+			return (EXIT_FAILURE);
+		}
 		shell->exit_status = EXIT_SUCCESS;
 	}
 	return (EXIT_SUCCESS);

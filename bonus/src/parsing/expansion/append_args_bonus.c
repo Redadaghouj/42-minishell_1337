@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:04:55 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/26 23:21:22 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/27 22:32:36 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	get_args_count(char **args)
 {
 	int	i;
 
+	if (!args)
+		return (1);
 	i = 0;
 	while (args[i])
 		i++;

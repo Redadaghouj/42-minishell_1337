@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:00:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/27 19:18:54 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/27 22:23:13 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_expander
 }	t_expander;
 
 /* EXPANSION */
-void	expansion(t_shell *shell);
+int		expansion(t_shell *shell);
 void	expander_magic(t_expander *exp, char *value, int *i, t_shell *shell);
 
 /* EXPANSION UTILS */
@@ -42,6 +42,7 @@ char	*append_char(char *s1, char c);
 /* APPEND ARGS */
 bool	should_split(char *exp_value, bool space, bool squote, bool dquote);
 char	**append_args(char **args, char *value, int *pos, int j);
+int		get_args_count(char **args);
 
 /* QUOTE CLEANER */
 void	quote_cleaner(t_cmd *cmd);

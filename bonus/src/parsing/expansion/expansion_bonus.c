@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:34:14 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/27 19:44:34 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 00:32:36 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	expand_redir(t_redir *redir, t_shell *shell)
 	}
 }
 
-void	expansion(t_shell *shell)
+int	expansion(t_shell *shell)
 {
 	int		i;
 	char	*exp_value;
@@ -104,8 +104,9 @@ void	expansion(t_shell *shell)
 			}
 		}
 		expand_redir(ptr->redir, shell);
-		expand_wildcards(ptr);
+		if (expand_wildcards(ptr))
+			return (EXIT_FAILURE);
 		ptr = ptr->next;
 	}
-	quote_cleaner(shell->cmd);
+	return (EXIT_SUCCESS);
 }
