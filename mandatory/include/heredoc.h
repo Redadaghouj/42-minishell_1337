@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:40:12 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/25 23:13:02 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:15:40 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <fcntl.h>
 # include <sys/wait.h>
+
 # include "expansion.h"
 
 # define HEREDOC_TMP "/tmp/.minishell_heredoc.tmp"

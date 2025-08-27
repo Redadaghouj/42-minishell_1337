@@ -3,21 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/25 23:09:40 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:15:28 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
 
-# include "env.h"
-# include "parser.h"
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
+
+# include "env.h"
+# include "parser.h"
 
 typedef struct s_shell	t_shell;
 

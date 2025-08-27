@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/27 00:43:47 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:43:46 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	process_line(char *input, t_shell *shell)
 	ft_lstclear_token(&token);
 	expansion(shell);
 	handle_heredoc(shell);
-	// execution(shell);
-	print_cmd_list(shell->cmd);
+	execution(shell);
+	// print_cmd_list(shell->cmd);
 	cleanup_resources(&shell->cmd, input);
 }
 

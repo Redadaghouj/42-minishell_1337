@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:34:14 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/26 23:21:27 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:44:34 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void	expansion(t_shell *shell)
 			}
 		}
 		expand_redir(ptr->redir, shell);
+		expand_wildcards(ptr);
 		ptr = ptr->next;
 	}
 	quote_cleaner(shell->cmd);

@@ -6,12 +6,14 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:00:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/27 00:33:01 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:18:54 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANSION_BONUS_H
 # define EXPANSION_BONUS_H
+
+# include <dirent.h>
 
 # include "parser_bonus.h"
 # include "env_bonus.h"
@@ -45,6 +47,6 @@ char	**append_args(char **args, char *value, int *pos, int j);
 void	quote_cleaner(t_cmd *cmd);
 
 /* WILDCARD */
-void	expand_wildcards(t_cmd *cmd);
+int		expand_wildcards(t_cmd *cmd);
 
 #endif

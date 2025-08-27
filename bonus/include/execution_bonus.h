@@ -6,18 +6,19 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/26 23:30:46 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/27 19:15:54 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_BONUS_H
 # define EXECUTION_BONUS_H
 
-# include "env_bonus.h"
-# include "parser_bonus.h"
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <errno.h>
+
+# include "env_bonus.h"
+# include "parser_bonus.h"
 
 typedef struct s_shell	t_shell;
 
