@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/28 23:28:09 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 23:40:49 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,16 +68,16 @@ void	generate_prompt(char **prompt, t_env *env)
 	char	cwd[1024];
 	char	*username;
 
-	getcwd(cwd, sizeof(cwd));
 	*prompt = ft_strdup(GREEN);
 	username = get_env_value(ft_strdup("USER"), env);
 	if (!username)
 		username = ft_strdup("unknown");
 	*prompt = ft_strjoin(*prompt, username);
-	*prompt = ft_strjoin(*prompt, RESET"@");
-	*prompt = ft_strjoin(*prompt, YELLOW"shellnobyl");
-	*prompt = ft_strjoin(*prompt, RESET":"BLUE);
-	*prompt = ft_strjoin(*prompt, cwd);
+	*prompt = ft_strjoin(*prompt, RESET"@"YELLOW"shellnobyl"RESET":"BLUE);
+	if (getcwd(cwd, sizeof(cwd)))
+		*prompt = ft_strjoin(*prompt, cwd);
+	else
+		*prompt = ft_strjoin(*prompt, "?");
 	*prompt = ft_strjoin(*prompt, RESET);
 	*prompt = ft_strjoin(*prompt, "$ ");
 }
