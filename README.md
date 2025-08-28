@@ -1,6 +1,7 @@
 # ☢️ Shellnobyl: Minishell - 1337 Project
 
-[](https://www.42network.org/)
+[![1337 Badge](https://img.shields.io/badge/1337-Project-blue)](https://www.42network.org/)
+![Status](https://img.shields.io/badge/Status-In_Progress-orange) ![Grade](https://img.shields.io/badge/Grade-0%2F100-progress)
 
 ## 📜 Project Overview
 
@@ -173,4 +174,4 @@ make re         # Performs a full rebuild
 -----
 
 For complete details, refer to the subject file:
-📄 [`en.subject.pdf`](https://www.google.com/search?q=redadaghouj/42-minishell_1337/42-minishell_1337-80feb20c49e979d2b9d2d6b6875d2299cdffe1f1/subject/en.subject.pdf)
+📄 [`en.subject.pdf`](https://github.com/Redadaghouj/42-minishell_1337/blob/main/subject/en.subject.pdf)
