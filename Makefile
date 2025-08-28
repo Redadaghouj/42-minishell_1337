@@ -1,3 +1,9 @@
+# Color Definitions
+RED     := \033[0;31m
+GREEN   := \033[0;32m
+YELLOW  := \033[0;33m
+RESET   := \033[0m
+
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -g -fsanitize=address
 
@@ -162,25 +168,35 @@ BONUS_OBJS := ${BONUS_SRC:.c=.o}
 all: ${NAME}
 
 ${NAME}: ${OBJS} ${MANDO_INC}/minishell.h
-	${CC} ${CFLAGS} ${OBJS} ${LIB_RL} -o ${NAME}
+	@printf "$(GREEN)  Linking $(NAME)...$(RESET)\n"
+	@${CC} ${CFLAGS} ${OBJS} ${LIB_RL} -o ${NAME}
 	@${RM} ${BONUS_OBJS}
+	@printf "$(GREEN)  Successfully built $(NAME)$(RESET)\n"
 
 bonus: .bonus
 
 .bonus: ${BONUS_OBJS} ${BONUS_INC}/*_bonus.h
-	${CC} ${CFLAGS} ${BONUS_OBJS} ${LIB_RL} -o ${NAME}
+	@printf "$(GREEN)  Linking bonus $(NAME)...$(RESET)\n"
+	@${CC} ${CFLAGS} ${BONUS_OBJS} ${LIB_RL} -o ${NAME}
 	@touch .bonus
 	@${RM} ${OBJS}
+	@printf "$(GREEN)  Successfully built $(NAME)$(RESET)\n"
 
 %.o: %.c
-	${CC} ${CFLAGS} ${INCLUDE_RL} -c $< -o $@
+	@printf "$(YELLOW)  Compiling $<...$(RESET)\n"
+	@${CC} ${CFLAGS} ${INCLUDE_RL} -c $< -o $@
 
 clean:
+	@printf "$(RED)  Cleaning object files...$(RESET)\n"
 	@${RM} ${OBJS} ${BONUS_OBJS} .bonus
+	@printf "$(GREEN)  Object files removed$(RESET)\n"
 
 fclean: clean
+	@printf "$(RED)  Removing executable...$(RESET)\n"
 	@${RM} ${NAME}
+	@printf "$(GREEN)  Executable file removed$(RESET)\n"
 
 re: fclean all
+	@printf "$(YELLOW)  Rebuilding project...$(RESET)\n"
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus
