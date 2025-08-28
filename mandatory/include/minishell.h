@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/27 19:15:19 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:23:23 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # include "env.h"
 # include "heredoc.h"
 # include "execution.h"
+
+# define RESET "\033[0m"
+# define GREEN "\033[1;32m" 
+# define RED "\033[1;31m"
+# define BLUE "\033[1;34m"
 
 # define EXIT_SUCCESS 0
 # define EXIT_FAILURE 1
@@ -72,6 +77,6 @@ char	*rb_strjoin(char *s1, char *s2);
 int		is_eof_input(t_shell *shell, char *input);
 void	handle_sigint(int sig);
 void	setup_main_signals(void);
-t_env	*init_env(void);
+void	generate_prompt(char **prompt);
 
 #endif

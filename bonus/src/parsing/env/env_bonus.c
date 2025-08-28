@@ -6,11 +6,29 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 21:31:17 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/26 23:20:55 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:25:30 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell_bonus.h"
+
+t_env	*init_env(void)
+{
+	t_env	*env;
+
+	env = NULL;
+	env = parse_env();
+	if (!env)
+	{
+		env = (t_env *)malloc(sizeof(t_env));
+		if (!env)
+			return (NULL);
+		env->key = ft_strdup(ENV_PATH_KEY);
+		env->value = ft_strdup(DEFAULT_PATH);
+		env->next = NULL;
+	}
+	return (env);
+}
 
 t_env	*parse_env(void)
 {

@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/25 23:14:50 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:23:17 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,26 @@ void	*free_buffer(char **buffer)
 	return (NULL);
 }
 
-t_env	*init_env(void)
+void	generate_prompt(char **prompt)
 {
-	t_env	*env;
+	char	cwd[1024];
+	char	**buffer;
+	int		i;
 
-	env = NULL;
-	env = parse_env();
-	if (!env)
+	i = 2;
+	getcwd(cwd, sizeof(cwd));
+	buffer = ft_split(cwd, '/');
+	*prompt = ft_strjoin(ft_strdup(GREEN), buffer[1]);
+	*prompt = ft_strjoin(*prompt, RESET"@");
+	*prompt = ft_strjoin(*prompt, RED"shellnobyl"RESET);
+	while (buffer[i] != NULL)
 	{
-		env = (t_env *)malloc(sizeof(t_env));
-		if (!env)
-			return (NULL);
-		env->key = ft_strdup(ENV_PATH_KEY);
-		env->value = ft_strdup(DEFAULT_PATH);
-		env->next = NULL;
+		*prompt = ft_strjoin(*prompt, "/");
+		*prompt = ft_strjoin(*prompt, BLUE);
+		*prompt = ft_strjoin(*prompt, buffer[i]);
+		*prompt = ft_strjoin(*prompt, RESET);
+		i++;
 	}
-	return (env);
+	*prompt = ft_strjoin(*prompt, "$ ");
+	free_buffer(buffer);
 }

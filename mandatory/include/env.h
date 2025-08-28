@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 17:03:39 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/25 23:12:50 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:21:51 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ typedef struct s_env
 
 /* ENV */
 char	*get_env_value(char *var, t_env *env);
-char	*rb_get_env_value(char *var, t_env *env);
 t_env	*parse_env(void);
+t_env	*init_env(void);
 
 /* ENV LISTS */
 t_env	*ft_lstnew_env(char *value, char *key);

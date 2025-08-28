@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/28 17:04:26 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 18:23:27 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ void	process_line(char *input, t_shell *shell)
 void	run_interactive_shell(t_shell *shell)
 {
 	char	*input;
+	char	*prompt;
 
+	prompt = NULL;
 	setup_main_signals();
 	while (true)
 	{
-		input = readline("☢️ shellnobyl$ ");
+		generate_prompt(&prompt);
+		input = readline(prompt);
+		free(prompt);
 		if (is_eof_input(shell, input))
 			break ;
 		if (*input)
