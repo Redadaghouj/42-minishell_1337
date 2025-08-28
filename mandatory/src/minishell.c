@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/28 18:23:27 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 22:13:42 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	run_interactive_shell(t_shell *shell)
 	setup_main_signals();
 	while (true)
 	{
-		generate_prompt(&prompt);
+		generate_prompt(&prompt, shell->env);
 		input = readline(prompt);
 		free(prompt);
 		if (is_eof_input(shell, input))
