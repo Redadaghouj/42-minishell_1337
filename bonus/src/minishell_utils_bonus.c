@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/28 22:41:46 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 22:44:41 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	generate_prompt(char **prompt, t_env *env)
 {
 	char	cwd[1024];
 	char	*username;
-	
+
 	getcwd(cwd, sizeof(cwd));
 	*prompt = ft_strdup(GREEN);
 	username = get_env_value(ft_strdup("USER"), env);
