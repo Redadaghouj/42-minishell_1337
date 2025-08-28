@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 13:33:47 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/28 22:42:03 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 23:30:04 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 # define RESET "\033[0m"
 # define GREEN "\033[1;32m" 
-# define RED "\033[1;31m"
+# define YELLOW "\033[0;33m"
 # define BLUE "\033[1;34m"
 
 # define EXIT_SUCCESS 0

@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/28 22:44:41 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 23:29:46 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	generate_prompt(char **prompt, t_env *env)
 		username = ft_strdup("unknown");
 	*prompt = ft_strjoin(*prompt, username);
 	*prompt = ft_strjoin(*prompt, RESET"@");
-	*prompt = ft_strjoin(*prompt, RED"shellnobyl:"RESET BLUE);
+	*prompt = ft_strjoin(*prompt, YELLOW"shellnobyl");
+	*prompt = ft_strjoin(*prompt, RESET":"BLUE);
 	*prompt = ft_strjoin(*prompt, cwd);
 	*prompt = ft_strjoin(*prompt, RESET);
 	*prompt = ft_strjoin(*prompt, "$ ");
