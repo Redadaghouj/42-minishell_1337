@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:00:29 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/27 22:23:13 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 03:13:53 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,9 @@ void	quote_cleaner(t_cmd *cmd);
 
 /* WILDCARD */
 int		expand_wildcards(t_cmd *cmd);
+bool	is_match(char *str, char *pattern);
+
+/* WILDCARD REDIR */
+int		expand_wildcards_redir(t_redir *redir);
 
 #endif

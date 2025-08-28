@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 18:34:14 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/28 00:32:36 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 03:35:03 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*expand_var(char *value, t_shell *shell)
 	return (exp.output);
 }
 
-void	expand_redir(t_redir *redir, t_shell *shell)
+int	expand_redir(t_redir *redir, t_shell *shell)
 {
 	while (redir)
 	{
@@ -78,8 +78,14 @@ void	expand_redir(t_redir *redir, t_shell *shell)
 			redir->file_delim = expand_var(redir->file_delim, shell);
 		else if (redir->type == TOKEN_HEREDOC)
 			should_heredoc_expand(redir);
+		if (ft_strchr(redir->file_delim, '*'))
+		{
+			if (expand_wildcards_redir(redir))
+				return (EXIT_FAILURE);
+		}
 		redir = redir->next;
 	}
+	return (EXIT_SUCCESS);
 }
 
 int	expansion(t_shell *shell)
@@ -103,8 +109,7 @@ int	expansion(t_shell *shell)
 				i++;
 			}
 		}
-		expand_redir(ptr->redir, shell);
-		if (expand_wildcards(ptr))
+		if (expand_redir(ptr->redir, shell) || expand_wildcards(ptr))
 			return (EXIT_FAILURE);
 		ptr = ptr->next;
 	}

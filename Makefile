@@ -124,7 +124,8 @@ BONUS_EXPANSION := ${BONUS_EXPANSION_PATH}/expansion_bonus.c \
 				   ${BONUS_EXPANSION_PATH}/expansion_utils_bonus.c \
 				   ${BONUS_EXPANSION_PATH}/append_args_bonus.c \
 				   ${BONUS_EXPANSION_PATH}/quote_cleaner_bonus.c \
-				   ${BONUS_EXPANSION_PATH}/wildcard_bonus.c
+				   ${BONUS_EXPANSION_PATH}/wildcard_bonus.c \
+				   ${BONUS_EXPANSION_PATH}/wildcard_redir_bonus.c
 
 BONUS_ENV := ${BONUS_ENV_PATH}/env_bonus.c \
 			 ${BONUS_ENV_PATH}/env_lists_bonus.c
