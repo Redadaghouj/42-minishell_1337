@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:22:30 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 23:06:22 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/08/28 17:03:42 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	print_export_format(t_shell *shell)
 			printf("declare -x %s\n", env->key);
 		env = env->next;
 	}
-	shell->exit_status = EXIT_SUCCESS;
 }
 
 int	is_valid_identifier(char *str)
@@ -74,7 +73,6 @@ static void	export_variable(char *arg, t_shell *shell)
 	char	*value;
 
 	equal_sign_string = ft_strchr(arg, '=');
-	shell->exit_status = EXIT_FAILURE;
 	if (equal_sign_string)
 	{
 		key = ft_substr(arg, 0, equal_sign_string - arg);
@@ -86,12 +84,15 @@ static void	export_variable(char *arg, t_shell *shell)
 		}
 		else
 			printf("Shellnobyl: export: `%s': not a valid identifier\n", arg);
-		free(key);
-		free(value);
+		(free(key), free(value));
 	}
 	else
+	{
 		if (!is_valid_identifier(arg))
-			printf ("Shellnobyl: export: `%s': not a valid identifier", arg);
+			printf ("Shellnobyl: export: `%s': not a valid identifier\n", arg);
+		else
+			shell->exit_status = EXIT_SUCCESS;
+	}
 }
 
 void	ft_export(t_shell *shell, char **args)
@@ -103,11 +104,13 @@ void	ft_export(t_shell *shell, char **args)
 	if (!args[1])
 	{
 		print_export_format(shell);
+		shell->exit_status = EXIT_SUCCESS;
 		return ;
 	}
 	i = 1;
 	while (args[i])
 	{
+		shell->exit_status = EXIT_FAILURE;
 		export_variable(args[i], shell);
 		i++;
 	}

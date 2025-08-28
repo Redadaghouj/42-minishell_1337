@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 12:26:52 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/28 00:24:00 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/28 17:04:26 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(void)
 	t_shell	shell;
 
 	shell.env = init_env();
-	shell.exit_status = 0;
+	shell.exit_status = EXIT_SUCCESS;
 	if (isatty(STDIN_FILENO))
 		run_interactive_shell(&shell);
 	else
