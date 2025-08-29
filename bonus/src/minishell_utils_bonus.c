@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/28 23:41:18 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:55:46 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,5 @@ void	generate_prompt(char **prompt, t_env *env)
 		*prompt = ft_strjoin(*prompt, cwd);
 	else
 		*prompt = ft_strjoin(*prompt, "?");
-	*prompt = ft_strjoin(*prompt, RESET);
-	*prompt = ft_strjoin(*prompt, "$ ");
+	*prompt = ft_strjoin(*prompt, RESET"$ ");
 }
