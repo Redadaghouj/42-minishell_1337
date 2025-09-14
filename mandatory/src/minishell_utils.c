@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/08/29 17:56:09 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/09/14 11:19:11 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,6 @@ void	generate_prompt(char **prompt, t_env *env)
 	else
 		*prompt = ft_strjoin(*prompt, "?");
 	*prompt = ft_strjoin(*prompt, RESET"$ ");
+	if (!ft_strcmp(username, "unknown"))
+		free(username);
 }
