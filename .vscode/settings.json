@@ -6,6 +6,7 @@
         "execution.h": "c",
         "stdbool.h": "c",
         "minishell.h": "c",
-        "stdlib.h": "c"
+        "stdlib.h": "c",
+        "cstdlib": "c"
     }
 }
