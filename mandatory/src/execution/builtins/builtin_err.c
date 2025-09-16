@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_bonus.c                                        :+:      :+:    :+:   */
+/*   builtin_err.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/21 13:59:34 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/09/16 10:03:26 by mdaghouj         ###   ########.fr       */
+/*   Created: 2025/09/16 09:53:34 by mdaghouj          #+#    #+#             */
+/*   Updated: 2025/09/16 09:56:42 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell_bonus.h"
+#include "../../../include/minishell.h"
 
-void	ft_pwd(t_shell *shell)
+void	builtin_err(char *prefix, char *str, char *postfix)
 {
-	char	cwd[1024];
-
-	if (getcwd(cwd, sizeof(cwd)))
-	{
-		ft_putstr_fd(cwd, 1);
-		ft_putstr_fd("\n", 1);
-		shell->exit_status = EXIT_SUCCESS;
-	}
-	else
-	{
-		perror("Error :pwd not working");
-		shell->exit_status = EXIT_SUCCESS;
-	}
+	ft_putstr_fd("shellnobyl: ", STDERR_FILENO);
+	ft_putstr_fd(prefix, STDERR_FILENO);
+	ft_putstr_fd(str, STDERR_FILENO);
+	ft_putstr_fd(postfix, STDERR_FILENO);
 }

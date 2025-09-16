@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/24 23:03:45 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 23:04:01 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/09/16 09:57:03 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,20 @@ void	ft_cd(t_shell *shell, char **args)
 		if (!home || chdir(home))
 		{
 			shell->exit_status = EXIT_FAILURE;
-			perror("Shellnobyl: cd");
+			if (!home)
+				ft_putstr_fd("shellnobyl: cd: HOME not set\n", STDERR_FILENO);
+			else
+				perror("shellnobyl: cd");
 		}
 	}
 	else if (args[2])
 	{
 		shell->exit_status = EXIT_FAILURE;
-		printf("Shellnobyl: cd: too many arguments\n");
+		ft_putstr_fd("shellnobyl: cd: too many arguments\n", STDERR_FILENO);
 	}
 	else if (chdir(args[1]))
 	{
 		shell->exit_status = EXIT_FAILURE;
-		printf("Shellnobyl: cd: %s: No such file or directory\n", args[1]);
+		builtin_err("cd: ", args[1], ": No such file or directory\n");
 	}
 }

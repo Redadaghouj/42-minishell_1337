@@ -74,6 +74,7 @@ EXECUTION := ${EXECUTION_PATH}/execution.c \
 		   ${EXECUTION_PATH}/builtins/export.c \
 		   ${EXECUTION_PATH}/builtins/pwd.c \
 		   ${EXECUTION_PATH}/builtins/unset.c \
+		   ${EXECUTION_PATH}/builtins/builtin_err.c \
 		   ${EXECUTION_PATH}/pipe/pipe.c \
 		   ${EXECUTION_PATH}/redirection/redir.c \
 		   ${EXECUTION_PATH}/redirection/ambiguous_redir.c
@@ -148,6 +149,7 @@ BONUS_EXECUTION := ${BONUS_EXECUTION_PATH}/execution_bonus.c \
 				   ${BONUS_EXECUTION_PATH}/builtins/export_bonus.c \
 				   ${BONUS_EXECUTION_PATH}/builtins/pwd_bonus.c \
 				   ${BONUS_EXECUTION_PATH}/builtins/unset_bonus.c \
+				   ${BONUS_EXECUTION_PATH}/builtins/builtin_err_bonus.c \
 				   ${BONUS_EXECUTION_PATH}/pipe/pipe_bonus.c \
 				   ${BONUS_EXECUTION_PATH}/redirection/redir_bonus.c \
 				   ${BONUS_EXECUTION_PATH}/redirection/ambiguous_redir_bonus.c

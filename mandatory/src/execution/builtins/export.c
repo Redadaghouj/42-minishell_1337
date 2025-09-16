@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:22:30 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/28 17:03:42 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/09/16 09:58:46 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ static void	export_variable(char *arg, t_shell *shell)
 			handle_assignment(key, value, &shell->env);
 		}
 		else
-			printf("Shellnobyl: export: `%s': not a valid identifier\n", arg);
+			builtin_err("export: `", arg, "': not a valid identifier\n");
 		(free(key), free(value));
 	}
 	else
 	{
 		if (!is_valid_identifier(arg))
-			printf ("Shellnobyl: export: `%s': not a valid identifier\n", arg);
+			builtin_err("export: `", arg, "': not a valid identifier\n");
 		else
 			shell->exit_status = EXIT_SUCCESS;
 	}

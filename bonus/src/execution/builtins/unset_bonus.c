@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:23:35 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/26 23:19:31 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/09/16 10:03:37 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	unset_variable(char *arg, t_shell *shell)
 	else
 	{
 		shell->exit_status = EXIT_FAILURE;
-		printf("Shellnobyl: unset: `%s': not a valid identifier\n", arg);
+		builtin_err("unset: `", arg, "': not a valid identifier\n");
 	}
 }
 

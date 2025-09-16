@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/01 15:05:03 by mdaghouj          #+#    #+#             */
-/*   Updated: 2025/09/14 11:19:25 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/09/15 13:24:15 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	is_eof_input(t_shell *shell, char *input)
 	{
 		shell->exit_status = EXIT_SUCCESS;
 		printf("exit\n");
-		free(input);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

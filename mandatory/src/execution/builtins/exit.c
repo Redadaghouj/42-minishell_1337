@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:14:16 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/25 16:33:03 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/09/16 09:56:09 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void	ft_exit(t_shell *shell, char **args)
 	}
 	else if (!is_number(args[1]))
 	{
-		printf("shellnobyl: exit: %s: numeric argument required\n", args[1]);
+		builtin_err("exit: ", args[1], ": numeric argument required\n");
 		shell->exit_status = EXIT_SYNTAX;
 		exit(shell->exit_status = EXIT_SYNTAX);
 	}
 	else if (arg_count > 2)
 	{
-		printf("shellnobyl: exit: too many arguments\n");
+		ft_putstr_fd("shellnobyl: exit: too many arguments\n", STDERR_FILENO);
 		shell->exit_status = EXIT_FAILURE;
 		exit(shell->exit_status);
 	}

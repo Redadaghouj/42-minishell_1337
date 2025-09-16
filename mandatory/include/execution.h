@@ -6,7 +6,7 @@
 /*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 16:34:46 by redadgh           #+#    #+#             */
-/*   Updated: 2025/08/27 19:15:28 by mdaghouj         ###   ########.fr       */
+/*   Updated: 2025/09/16 09:53:09 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_exit(t_shell *shell, char **args);
 void	ft_echo(t_shell *shell, char **args);
 void	ft_env(t_shell *shell);
 void	ft_pwd(t_shell *shell);
+void	builtin_err(char *prefix, char *str, char *postfix);
 
 //utils
 bool	setup_with_backup(t_cmd *cmd, int *save_stdout, int *save_stdin);

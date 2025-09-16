@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rben-ais <rben-ais@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: mdaghouj <mdaghouj@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 15:23:35 by rben-ais          #+#    #+#             */
-/*   Updated: 2025/08/24 23:03:30 by rben-ais         ###   ########.fr       */
+/*   Updated: 2025/09/16 09:59:43 by mdaghouj         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void	unset_variable(char *arg, t_shell *shell)
 	else
 	{
 		shell->exit_status = EXIT_FAILURE;
-		printf("Shellnobyl: unset: `%s': not a valid identifier\n", arg);
+		builtin_err("unset: `", arg, "': not a valid identifier\n");
 	}
 }
 
