@@ -1,7 +1,7 @@
 # ☢️ Shellnobyl: Minishell - 1337 Project
 
 [![1337 Badge](https://img.shields.io/badge/1337-Project-blue)](https://www.42network.org/)
-![Status](https://img.shields.io/badge/Status-Completed-brightgreen) ![Grade](https://img.shields.io/badge/Grade-0%2F100-progress)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen) ![Grade](https://img.shields.io/badge/Grade-110%2F100-progress)
 
 ## 📜 Project Overview
 
