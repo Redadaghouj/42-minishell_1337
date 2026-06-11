@@ -7,8 +7,6 @@
 
 Minishell is a project from the 42 Network that involves creating a simple command-line interpreter, similar to a basic version of Bash. The project aims to provide a deep understanding of processes and file descriptors.
 
-🌐 **Live Demo:** https://minishell.jumpingcrab.com
-
 ## 🚀 Features
 
 ### ✅ Mandatory Part
